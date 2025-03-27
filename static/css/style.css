@@ -107,7 +107,7 @@ nav {
   width: 120px;
   height: 88px;
   border: none;
-  border-right: 12px solid #000000;
+  border-right: 8px solid #000000;
   cursor: pointer;
   font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
@@ -118,11 +118,11 @@ nav {
 
 #last_btn {
   width: 160px;
-  margin-right: -30px;
+  margin-right: -50px;
 }
 
 #last_btn span {
-  transform: skew(20deg) translateX(10px);
+  transform: skew(20deg) translateX(-11px);
 }
 
 @media (max-width: 768px) {
@@ -162,7 +162,7 @@ nav {
     width: 120px;
     height: 88px;
     border: none;
-    border-right: 12px solid #000000;
+    border-right: 8px solid #000000;
     cursor: pointer;
     font-family: 'Arial Black', Arial, sans-serif;
     text-transform: uppercase;
