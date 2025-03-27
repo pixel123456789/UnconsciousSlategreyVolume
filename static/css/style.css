@@ -118,9 +118,6 @@ nav {
 
 .nav_btn:last-child {
   margin-right: 0;
-  border-right: none;
-  width: 132px;
-  clip-path: polygon(20px 0, 100% 0, 100% 100%, 20px 100%);
 }
 
 @media (max-width: 768px) {
@@ -167,12 +164,6 @@ nav {
     letter-spacing: -1px;
     transition: background-color 0.3s ease;
     margin: 0;
-  }
-
-  .nav_btn:last-child {
-    border-right: none;
-    width: 132px;
-    clip-path: polygon(20px 0, 100% 0, 100% 100%, 20px 100%);
   }
 
   .nav_btn span {
