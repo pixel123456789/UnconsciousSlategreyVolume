@@ -36,16 +36,39 @@ nav {
   padding: 10px;
   z-index: 999;
   position: relative;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.hamburger.active {
+  opacity: 0;
+}
+
+.hamburger.active + .nav_links .hamburger-nav {
+  opacity: 1;
+}
+
+.hamburger-nav {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 999;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 @media (max-width: 768px) {
-  .hamburger {
+  .hamburger, .hamburger-nav {
     display: flex;
-    margin-left: 12px;
   }
 }
 
-.hamburger div {
+.hamburger div, .hamburger-nav div {
   width: 25px;
   height: 3px;
   background-color: white;
