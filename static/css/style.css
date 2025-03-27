@@ -34,7 +34,7 @@ nav {
   flex-direction: column;
   cursor: pointer;
   padding: 10px;
-  z-index: 1000;
+  z-index: 999;
 }
 
 @media (max-width: 768px) {
@@ -90,18 +90,22 @@ nav {
 }
 
 @media (max-width: 768px) {
+  nav {
+    position: static;
+  }
+  
   .nav_links {
     position: fixed;
-    top: 88px;
+    top: 0;
     right: -100%;
     width: 100%;
-    height: auto;
+    height: 100vh;
     background: #000000;
     flex-direction: column;
     align-items: stretch;
     transition: right 0.5s ease;
-    z-index: 999;
-    padding: 0;
+    z-index: 998;
+    padding: 88px 0 0 0;
     box-sizing: border-box;
   }
 
