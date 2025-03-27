@@ -72,12 +72,13 @@ nav {
   transform: skew(-20deg);
   padding: 12px 24px;
   border: none;
+  border-right: 12px solid #000000;
   cursor: pointer;
   font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: -1px;
   transition: background-color 0.3s ease;
-  margin-right: 12px;
+  margin: 0;
 }
 
 .nav_btn:last-child {
