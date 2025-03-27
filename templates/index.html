@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +11,22 @@
     <section id="nav">
         <h3 id="nav_logo">InI development.</h3>
         <nav>
-            <a><button class="nav_btn"><span>placeholder</span></button></a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="nav_links">
+                <a><button class="nav_btn"><span>Home</span></button></a>
+                <a><button class="nav_btn"><span>About</span></button></a>
+                <a><button class="nav_btn"><span>Contact</span></button></a>
+            </div>
         </nav>
     </section>
-    
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav_links').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
