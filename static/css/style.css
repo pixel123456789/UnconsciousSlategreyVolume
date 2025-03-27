@@ -117,15 +117,11 @@ nav {
 }
 
 .nav_btn:last-child {
-  transform: skew(0deg);
-  border-right: none;
   margin-right: 0;
+  border-right: none;
+  width: 132px;
+  clip-path: polygon(20px 0, 100% 0, 100% 100%, 20px 100%);
 }
-
-.nav_btn:last-child span {
-  transform: skew(0deg);
-}
-
 
 @media (max-width: 768px) {
   #nav {
@@ -136,7 +132,7 @@ nav {
     position: static;
     width: 100%;
   }
-
+  
   .nav_links {
     position: absolute;
     top: 0;
@@ -174,12 +170,13 @@ nav {
   }
 
   .nav_btn:last-child {
-    transform: skew(0deg);
     border-right: none;
+    width: 132px;
+    clip-path: polygon(20px 0, 100% 0, 100% 100%, 20px 100%);
   }
 
-  .nav_btn:last-child span {
-    transform: skew(0deg);
+  .nav_btn span {
+    transform: skew(20deg);
   }
 }
 
