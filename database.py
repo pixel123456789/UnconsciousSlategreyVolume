@@ -8,6 +8,7 @@ def init_db():
         os.makedirs('instance')
     
     conn = sqlite3.connect('instance/database.db')
+    conn.row_factory = sqlite3.Row
     c = conn.cursor()
     
     c.execute('''CREATE TABLE IF NOT EXISTS users 
@@ -56,6 +57,13 @@ def init_db():
                 is_read BOOLEAN DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (user_id) REFERENCES users (id))''')
+    
+    # Create admin user if it doesn't exist
+    admin = c.execute('SELECT * FROM users WHERE username = ?', ['admin']).fetchone()
+    if not admin:
+        from werkzeug.security import generate_password_hash
+        c.execute('INSERT INTO users (username, password, email, is_admin) VALUES (?, ?, ?, ?)',
+                 ['admin', generate_password_hash('ini.dev.liam'), 'liamaaronkinnaird1@outlook.com', True])
     
     conn.commit()
     conn.close()
