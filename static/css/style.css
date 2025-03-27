@@ -1,0 +1,17 @@
+#nav{
+  vertical-align:top;
+}
+
+#nav_logo{
+  display:inline-block;
+  width:40%
+}
+
+#nav_btn{
+  display:inline-block;
+}
+
+nav{
+  float:right
+  clear:both
+}
