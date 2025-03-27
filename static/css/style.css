@@ -72,7 +72,7 @@ nav {
   transform: skew(-20deg);
   padding: 12px 24px;
   border: none;
-  border-right: 12px solid #000;
+  border-right: 12px solid #fff;
   cursor: pointer;
   font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
@@ -106,7 +106,7 @@ nav {
 
   .nav_btn {
     transform: skew(-20deg);
-    border-right: 12px solid #000;
+    border-right: 12px solid #fff;
   }
 
   .nav_btn:last-child {
