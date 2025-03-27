@@ -1,0 +1,23 @@
+
+<div id="nav">
+    <h3 id="nav_logo">InI development.</h3>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="nav_links">
+            <div class="hamburger-nav" onclick="toggleMenu()"></div>
+            <a><button class="nav_btn"><span>Home</span></button></a>
+            <a><button class="nav_btn"><span>About</span></button></a>
+            <a><button class="nav_btn" id="last_btn"><span>Contact</span></button></a>
+        </div>
+    </nav>
+</div>
+<script>
+    function toggleMenu() {
+        document.querySelector('.hamburger').classList.toggle('active');
+        document.querySelector('.nav_links').classList.toggle('active');
+    }
+</script>
