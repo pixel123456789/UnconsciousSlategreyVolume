@@ -1,53 +1,80 @@
 
 .auth-container {
     max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
+    margin: 120px auto;
+    padding: 40px;
     background: #1a1a1a;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-left: 4px solid rebeccapurple;
+    color: white;
+}
+
+.auth-container h2 {
+    margin-bottom: 30px;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-input {
+.form-group input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    background: #222;
-    color: white;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background: rebeccapurple;
-    color: white;
+    padding: 12px;
+    background: #000;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border-left: 2px solid rebeccapurple;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    transition: all 0.3s ease;
 }
 
-button:hover {
+.form-group input:focus {
+    outline: none;
+    border-left: 4px solid rebeccapurple;
+    transform: translateX(5px);
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    background: rebeccapurple;
+    border: none;
+    color: white;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    cursor: pointer;
+    transform: skew(-20deg);
+    transition: all 0.3s ease;
+}
+
+.auth-container button:hover {
     background: #663399;
+    transform: skew(-20deg) scale(1.02);
+}
+
+.auth-container p {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+}
+
+.auth-container a {
+    color: rebeccapurple;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.auth-container a:hover {
+    color: #663399;
 }
 
 .alert {
+    background: rgba(102, 51, 153, 0.2);
+    border-left: 4px solid rebeccapurple;
     padding: 10px;
-    margin-bottom: 15px;
-    background: #ff4444;
-    color: white;
-    border-radius: 4px;
-}
-
-a {
-    color: rebeccapurple;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+    margin-bottom: 20px;
+    font-family: 'Space Mono', monospace;
 }
