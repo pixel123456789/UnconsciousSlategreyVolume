@@ -72,17 +72,16 @@ nav {
   transform: skew(-20deg);
   padding: 12px 24px;
   border: none;
-  border-right: 12px solid #fff;
   cursor: pointer;
   font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: -1px;
   transition: background-color 0.3s ease;
-  margin: 0;
+  margin-right: 12px;
 }
 
 .nav_btn:last-child {
-  border-right: none;
+  margin-right: 0;
 }
 
 @media (max-width: 768px) {
@@ -106,11 +105,11 @@ nav {
 
   .nav_btn {
     transform: skew(-20deg);
-    border-right: 12px solid #fff;
+    margin-right: 12px;
   }
 
   .nav_btn:last-child {
-    border-right: none;
+    margin-right: 0;
   }
 }
 
