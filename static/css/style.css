@@ -15,8 +15,7 @@
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  text-shadow: 2px 2px 0px rebeccapurple;
-}
+  }
 
 nav {
   display: flex;
@@ -34,12 +33,9 @@ nav {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
-  box-shadow: 4px 4px 0px #000000;
+  transition: background-color 0.3s ease;
 }
 
 .nav_btn:hover {
   background-color: #663399;
-  transform: skew(-20deg) translateY(-2px);
-  box-shadow: 6px 6px 0px #000000;
 }
