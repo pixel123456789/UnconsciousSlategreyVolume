@@ -1,0 +1,136 @@
+
+.hero-section {
+    position: relative;
+    height: calc(100vh - 88px);
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 4.5rem;
+    color: white;
+    line-height: 1.1;
+    margin: 0;
+    transform: skew(-5deg);
+}
+
+.hero-title .highlight {
+    color: rebeccapurple;
+    display: inline-block;
+    position: relative;
+}
+
+.hero-title .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: 10px;
+    background: rgba(102, 51, 153, 0.3);
+    transform: skew(20deg);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: #cccccc;
+    margin: 2rem 0;
+    line-height: 1.4;
+}
+
+.hero-btn {
+    background-color: rebeccapurple;
+    color: white;
+    transform: skew(-20deg);
+    padding: 0 40px;
+    height: 60px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-btn span {
+    display: inline-block;
+    transform: skew(20deg);
+}
+
+.hero-btn:hover {
+    background-color: #663399;
+    transform: skew(-20deg) scale(1.05);
+}
+
+.hero-shapes {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    background: rebeccapurple;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    right: 20%;
+    top: 20%;
+    transform: skew(-20deg) rotate(45deg);
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    right: 35%;
+    bottom: 30%;
+    transform: skew(-20deg) rotate(45deg);
+    animation-delay: -2s;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    right: 10%;
+    top: 40%;
+    transform: skew(-20deg) rotate(45deg);
+    animation-delay: -4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: skew(-20deg) rotate(45deg) translateY(0); }
+    50% { transform: skew(-20deg) rotate(45deg) translateY(-20px); }
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .hero-shapes {
+        opacity: 0.5;
+    }
+}
