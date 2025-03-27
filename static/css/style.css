@@ -117,8 +117,9 @@ nav {
 }
 
 #last_btn {
-  margin-right: 0;
-  clip-path: polygon(20px 0, 100% 0, 100% 100%, 20px 100%);
+  width:140px
+  margin-right:-130px
+  
 }
 
 @media (max-width: 768px) {
