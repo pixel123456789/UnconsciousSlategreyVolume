@@ -30,10 +30,15 @@ nav {
   padding: 12px 24px;
   border: none;
   cursor: pointer;
-  font-weight: bold;
+  font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: -1px;
   transition: background-color 0.3s ease;
+}
+
+.nav_btn span {
+  display: inline-block;
+  transform: skew(20deg);
 }
 
 .nav_btn:hover {
