@@ -1,17 +1,23 @@
-#nav{
-  vertical-align:top;
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
-#nav_logo{
-  display:inline-block;
-  width:40%
+#nav_logo {
+  margin: 0;
 }
 
-#nav_btn{
-  display:inline-block;
+nav {
+  display: flex;
+  align-items: center;
 }
 
-nav{
-  float:right
-  clear:both
+.nav_btn {
+  margin-left: 1rem;
+  background-color:rebeccapurple;
+  color:white;
+  skew
 }
+
