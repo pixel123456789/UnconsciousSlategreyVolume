@@ -2,14 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
-    <nav class="navbar">
-        <h1>Admin Dashboard</h1>
-        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
-    </nav>
+    {% include 'components/navbar.html' %}
     
     <div class="dashboard-container">
         <div class="notifications">
@@ -21,12 +20,12 @@
             {% endfor %}
         </div>
 
-        <div class="quotes-section">
-            <h2>Pending Quotes</h2>
-            <div class="items-grid">
+        <div class="dashboard-section">
+            <h3>Pending Quotes</h3>
+            <div class="dashboard-grid">
                 {% for quote in quotes %}
-                <div class="item-card" onclick="openQuoteDetails({{ quote.id }})">
-                    <h3>{{ quote.title }}</h3>
+                <div class="card" onclick="openQuoteDetails({{ quote.id }})">
+                    <h4>{{ quote.title }}</h4>
                     <p>Client: {{ quote.username }}</p>
                     <p>Status: {{ quote.status }}</p>
                 </div>
@@ -34,12 +33,12 @@
             </div>
         </div>
 
-        <div class="projects-section">
-            <h2>Active Projects</h2>
-            <div class="items-grid">
+        <div class="dashboard-section">
+            <h3>Active Projects</h3>
+            <div class="dashboard-grid">
                 {% for project in projects %}
-                <div class="item-card" onclick="openProjectDetails({{ project.id }})">
-                    <h3>Project #{{ project.id }}</h3>
+                <div class="card" onclick="openProjectDetails({{ project.id }})">
+                    <h4>Project #{{ project.id }}</h4>
                     <p>Client: {{ project.username }}</p>
                     <p>Status: {{ project.status }}</p>
                 </div>
@@ -47,5 +46,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function openQuoteDetails(id) {
+            window.location.href = `/quote/${id}`;
+        }
+        function openProjectDetails(id) {
+            window.location.href = `/project/${id}`;
+        }
+    </script>
 </body>
 </html>
