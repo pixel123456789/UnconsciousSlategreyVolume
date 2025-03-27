@@ -1,53 +1,31 @@
-
-<nav id="nav">
-    <div class="nav-left">
-        <h1 id="nav_logo">InI</h1>
-    </div>
-    {% if 'user_id' in session %}
-        <div class="nav-center">
-            <span class="username">{{ session.username }}</span>
+<div id="nav">
+    <h3 id="nav_logo">InI development.</h3>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-        <div class="nav-right">
-            <div class="notification-icon" onclick="toggleNotifications()">
-                <span class="notification-count">{{ notifications|length }}</span>
-                <div class="notification-dropdown">
-                    {% for notification in notifications %}
-                    <div class="notification-item">
-                        <p>{{ notification.content }}</p>
-                        <small>{{ notification.created_at }}</small>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="nav_links">
-                <a href="{{ url_for('dashboard') }}" class="nav_btn"><span>Dashboard</span></a>
-                <a href="{{ url_for('logout') }}" class="nav_btn" id="last_btn"><span>Logout</span></a>
-            </div>
+        <div class="nav_links">
+            <div class="hamburger-nav" onclick="toggleMenu()"></div>
+            {% if logged_in %}
+                {% if username == 'admin' %}
+                    <a href="{{ url_for('admin_dashboard') }}"><button class="nav_btn"><span>Dashboard</span></button></a>
+                {% else %}
+                    <a href="{{ url_for('dashboard') }}"><button class="nav_btn"><span>Dashboard</span></button></a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}"><button class="nav_btn"><span>Logout</span></button></a>
+            {% else %}
+                <a href="{{ url_for('login') }}"><button class="nav_btn"><span>Login</span></button></a>
+                <a href="{{ url_for('register') }}"><button class="nav_btn"><span>Register</span></button></a>
+            {% endif %}
+            <a href="/about"><button class="nav_btn" id="last_btn"><span>About</span></button></a>
         </div>
-    {% else %}
-        <div class="nav-right">
-            <div class="nav_links">
-                <a href="{{ url_for('login') }}" class="nav_btn"><span>Login</span></a>
-                <a href="{{ url_for('register') }}" class="nav_btn" id="last_btn"><span>Register</span></a>
-            </div>
-        </div>
-    {% endif %}
-</nav>
-
-
+    </nav>
+</div>
 <script>
-function toggleNotifications() {
-    const dropdown = document.querySelector('.notification-dropdown');
-    dropdown.classList.toggle('show');
-}
-
-// Close notifications when clicking outside
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.notification-icon')) {
-        const dropdown = document.querySelector('.notification-dropdown');
-        if (dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-        }
+    function toggleMenu() {
+        document.querySelector('.hamburger').classList.toggle('active');
+        document.querySelector('.nav_links').classList.toggle('active');
     }
-});
 </script>
