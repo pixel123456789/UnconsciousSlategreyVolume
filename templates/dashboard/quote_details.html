@@ -12,30 +12,30 @@
     <div class="dashboard-container">
         <div class="quote-details">
             <h2>{{ quote.title }}</h2>
-            <p class="description">{{ quote.description }}</p>
+            <p>{{ quote.description }}</p>
             <div class="status-badge {{ quote.status }}">{{ quote.status }}</div>
             {% if quote.price %}
-            <p class="price">${{ quote.price }}</p>
+                <p class="price">${{ quote.price }}</p>
             {% endif %}
-            
+
             {% if session.username == 'admin' and quote.status == 'pending' %}
-            <div class="admin-actions">
-                <form id="priceForm">
-                    <input type="number" name="price" placeholder="Enter price" required>
-                    <input type="hidden" name="quote_id" value="{{ quote.id }}">
-                    <button type="submit" class="action-button">Send Quote</button>
-                </form>
-            </div>
+                <div class="admin-actions">
+                    <form id="priceForm">
+                        <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                        <input type="number" name="price" step="0.01" placeholder="Enter quote price" required>
+                        <button type="submit" class="action-button">Send Quote</button>
+                    </form>
+                </div>
             {% endif %}
 
             {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
-            <div class="client-actions">
-                <button onclick="respondToQuote('accepted')" class="action-button accept">Accept Quote</button>
-                <button onclick="respondToQuote('rejected')" class="action-button reject">Reject Quote</button>
-            </div>
+                <div class="client-actions">
+                    <button onclick="respondToQuote('accepted')" class="action-button accept">Accept Quote</button>
+                    <button onclick="respondToQuote('rejected')" class="action-button reject">Reject Quote</button>
+                </div>
             {% endif %}
         </div>
-        
+
         <div class="messages-section">
             <h3>Messages</h3>
             <div class="messages-container">
@@ -46,7 +46,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <form id="messageForm" class="message-form">
+            <form id="messageForm">
                 <input type="text" name="content" placeholder="Type your message..." required>
                 <button type="submit" class="action-button">Send</button>
             </form>
@@ -54,7 +54,6 @@
     </div>
 
     <script>
-        // Handle price submission
         document.getElementById('priceForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
@@ -67,7 +66,6 @@
             }
         });
 
-        // Handle quote response (accept/reject)
         async function respondToQuote(status) {
             const formData = new FormData();
             formData.append('quote_id', '{{ quote.id }}');
@@ -83,7 +81,6 @@
             }
         }
 
-        // Handle message submission
         document.getElementById('messageForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target);
