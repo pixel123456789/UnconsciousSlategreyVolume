@@ -7,9 +7,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: 0 0 0 1.5rem;
   background: #000000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 88px;
 }
 
 #nav_logo {
@@ -71,7 +72,7 @@ nav {
   color: white;
   transform: skew(-20deg);
   padding: 0 24px;
-  height: 88px;
+  height: 100%;
   border: none;
   border-right: 12px solid #000000;
   cursor: pointer;
@@ -84,6 +85,7 @@ nav {
 
 .nav_btn:last-child {
   margin-right: 0;
+  border-right: none;
 }
 
 @media (max-width: 768px) {
