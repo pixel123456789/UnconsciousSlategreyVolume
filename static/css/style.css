@@ -15,7 +15,7 @@
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  text-shadow: 2px 2px 0px #ff0066;
+  text-shadow: 2px 2px 0px rebeccapurple;
 }
 
 nav {
@@ -25,7 +25,7 @@ nav {
 
 .nav_btn {
   margin-left: 1rem;
-  background-color: #ff0066;
+  background-color: rebeccapurple;
   color: white;
   transform: skew(-20deg);
   padding: 12px 24px;
@@ -39,7 +39,7 @@ nav {
 }
 
 .nav_btn:hover {
-  background-color: #ff1a75;
+  background-color: #663399;
   transform: skew(-20deg) translateY(-2px);
   box-shadow: 6px 6px 0px #000000;
 }
