@@ -103,15 +103,12 @@ nav {
   }
 
   .nav_btn {
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: skew(-20deg);
+    border-right: 1px solid #000;
   }
 
-  .nav_links.active .nav_btn {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.3s;
+  .nav_btn:last-child {
+    border-right: none;
   }
 }
 
