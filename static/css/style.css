@@ -121,6 +121,10 @@ nav {
   margin-right: -30px;
 }
 
+#last_btn span {
+  transform: skew(20deg) translateX(10px);
+}
+
 @media (max-width: 768px) {
   #nav {
     width: 100%;
