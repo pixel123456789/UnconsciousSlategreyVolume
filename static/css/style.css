@@ -117,9 +117,8 @@ nav {
 }
 
 #last_btn {
-  width:140px
-  margin-right:-130px
-  
+  width: 160px;
+  margin-right: -140px;
 }
 
 @media (max-width: 768px) {
