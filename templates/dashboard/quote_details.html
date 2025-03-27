@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quote Details - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    <div class="dashboard-container">
+        <div class="quote-details">
+            <h2>{{ quote.title }}</h2>
+            <p class="description">{{ quote.description }}</p>
+            <div class="status-badge">{{ quote.status }}</div>
+            {% if quote.price %}
+            <p class="price">${{ quote.price }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="messages-section">
+            <h3>Messages</h3>
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="message">
+                    <p>{{ message.content }}</p>
+                    <small>{{ message.created_at }}</small>
+                </div>
+                {% endfor %}
+            </div>
+            <form class="message-form" onsubmit="sendMessage(event)">
+                <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                <input type="text" name="content" placeholder="Type your message..." required>
+                <button type="submit" class="action-button"><span>Send</span></button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
