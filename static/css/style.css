@@ -90,19 +90,24 @@ nav {
 }
 
 @media (max-width: 768px) {
+  #nav {
+    width: 100%;
+  }
+
   nav {
     position: static;
+    width: 100%;
   }
   
   .nav_links {
     position: absolute;
     top: 0;
     right: -100%;
-    width: 100%;
+    width: calc(100% - 45px);
     height: 88px;
     background: #000000;
     flex-direction: row;
-    align-items: stretch;
+    justify-content: space-between;
     transition: right 0.5s ease;
     z-index: 998;
     padding: 0;
@@ -110,11 +115,11 @@ nav {
   }
 
   .nav_links.active {
-    right: 0;
+    right: 45px;
   }
 
   .nav_btn {
-    width: 33.33%;
+    width: calc(100% / 3);
     transform: none;
     border-right: 12px solid #000000;
   }
