@@ -35,7 +35,8 @@ nav {
   cursor: pointer;
   padding: 10px;
   z-index: 999;
-  position: relative;
+  position: absolute;
+  right: 10px;
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -44,31 +45,28 @@ nav {
   opacity: 0;
 }
 
-.hamburger.active + .nav_links .hamburger-nav {
-  opacity: 1;
-}
-
 .hamburger-nav {
   display: none;
-  flex-direction: column;
   cursor: pointer;
   padding: 10px;
   z-index: 999;
   position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 10px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
+.hamburger.active + .nav_links .hamburger-nav {
+  opacity: 1;
+}
+
 @media (max-width: 768px) {
   .hamburger, .hamburger-nav {
-    display: flex;
+    display: block;
   }
 }
 
-.hamburger div, .hamburger-nav div {
+.hamburger div {
   width: 25px;
   height: 3px;
   background-color: white;
@@ -76,16 +74,24 @@ nav {
   transition: 0.3s;
 }
 
-.hamburger.active div:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+.hamburger-nav::before,
+.hamburger-nav::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
 }
 
-.hamburger.active div:nth-child(2) {
-  opacity: 0;
+.hamburger-nav::before {
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.hamburger.active div:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -6px);
+.hamburger-nav::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .nav_links {
