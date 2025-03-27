@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </nav>
+    
+    <div class="dashboard-container">
+        <div class="notifications">
+            {% for notification in notifications %}
+            <div class="notification">
+                {{ notification.content }}
+                <span class="date">{{ notification.created_at }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="quotes-section">
+            <h2>Pending Quotes</h2>
+            <div class="items-grid">
+                {% for quote in quotes %}
+                <div class="item-card" onclick="openQuoteDetails({{ quote.id }})">
+                    <h3>{{ quote.title }}</h3>
+                    <p>Client: {{ quote.username }}</p>
+                    <p>Status: {{ quote.status }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="projects-section">
+            <h2>Active Projects</h2>
+            <div class="items-grid">
+                {% for project in projects %}
+                <div class="item-card" onclick="openProjectDetails({{ project.id }})">
+                    <h3>Project #{{ project.id }}</h3>
+                    <p>Client: {{ project.username }}</p>
+                    <p>Status: {{ project.status }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

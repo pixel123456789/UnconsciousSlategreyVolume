@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <h1>Welcome {{ session.username }}</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </nav>
+    
+    <div class="dashboard-container">
+        <div class="notifications">
+            {% for notification in notifications %}
+            <div class="notification">
+                {{ notification.content }}
+                <span class="date">{{ notification.created_at }}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="quotes-section">
+            <h2>Quotes</h2>
+            <button onclick="openQuoteModal()" class="action-btn">Request Quote</button>
+            <div class="items-grid">
+                {% for quote in quotes %}
+                <div class="item-card" onclick="openQuoteDetails({{ quote.id }})">
+                    <h3>{{ quote.title }}</h3>
+                    <p>Status: {{ quote.status }}</p>
+                    <p>Price: ${{ quote.price or 'Pending' }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="projects-section">
+            <h2>Projects</h2>
+            <div class="items-grid">
+                {% for project in projects %}
+                <div class="item-card" onclick="openProjectDetails({{ project.id }})">
+                    <h3>Project #{{ project.id }}</h3>
+                    <p>Status: {{ project.status }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Request a Quote</h2>
+            <form action="{{ url_for('create_quote') }}" method="POST">
+                <input type="text" name="title" placeholder="Project Title" required>
+                <textarea name="description" placeholder="Project Description" required></textarea>
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal handling
+        function openQuoteModal() {
+            document.getElementById('quoteModal').style.display = 'block';
+        }
+
+        function openQuoteDetails(id) {
+            window.location.href = `/quote/${id}`;
+        }
+
+        function openProjectDetails(id) {
+            window.location.href = `/project/${id}`;
+        }
+
+        // Close button
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('quoteModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
