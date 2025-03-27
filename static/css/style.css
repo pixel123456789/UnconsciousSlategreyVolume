@@ -51,7 +51,7 @@ nav {
   padding: 10px;
   z-index: 999;
   position: absolute;
-  right: 10px;
+  left: 10px;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
