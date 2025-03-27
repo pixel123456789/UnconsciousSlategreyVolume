@@ -7,6 +7,7 @@
   background: #000000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   height: 88px;
+  overflow: hidden;
 }
 
 #nav_logo {
