@@ -2,13 +2,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(to right, #000000, #1a1a1a);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #nav_logo {
   margin: 0;
   font-weight: 900;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-size: 1.8rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  text-shadow: 2px 2px 0px #ff0066;
 }
 
 nav {
@@ -18,10 +25,21 @@ nav {
 
 .nav_btn {
   margin-left: 1rem;
-  background-color: rebeccapurple;
+  background-color: #ff0066;
   color: white;
   transform: skew(-20deg);
-  padding: 8px 16px;
+  padding: 12px 24px;
   border: none;
   cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.nav_btn:hover {
+  background-color: #ff1a75;
+  transform: skew(-20deg) translateY(-2px);
+  box-shadow: 6px 6px 0px #000000;
 }
