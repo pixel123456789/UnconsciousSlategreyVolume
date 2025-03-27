@@ -119,9 +119,20 @@ nav {
   }
 
   .nav_btn {
-    width: calc(100% / 3);
-    transform: none;
+    background-color: rebeccapurple;
+    color: white;
+    transform: skew(-20deg);
+    padding: 0;
+    width: 120px;
+    height: 88px;
+    border: none;
     border-right: 12px solid #000000;
+    cursor: pointer;
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    transition: background-color 0.3s ease;
+    margin: 0;
   }
 
   .nav_btn:last-child {
@@ -129,7 +140,7 @@ nav {
   }
 
   .nav_btn span {
-    transform: none;
+    transform: skew(20deg);
   }
 }
 
