@@ -135,10 +135,6 @@ nav {
     margin: 0;
   }
 
-  .nav_btn:last-child {
-    border-right: none;
-  }
-
   .nav_btn span {
     transform: skew(20deg);
   }
