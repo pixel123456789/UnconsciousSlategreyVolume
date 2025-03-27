@@ -95,17 +95,17 @@ nav {
   }
   
   .nav_links {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: -100%;
     width: 100%;
-    height: 100vh;
+    height: 88px;
     background: #000000;
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
     transition: right 0.5s ease;
     z-index: 998;
-    padding: 88px 0 0 0;
+    padding: 0;
     box-sizing: border-box;
   }
 
@@ -114,14 +114,13 @@ nav {
   }
 
   .nav_btn {
-    width: 100%;
+    width: 33.33%;
     transform: none;
-    border-right: none;
-    border-bottom: 12px solid #000000;
+    border-right: 12px solid #000000;
   }
 
   .nav_btn:last-child {
-    border-bottom: none;
+    border-right: none;
   }
 
   .nav_btn span {
