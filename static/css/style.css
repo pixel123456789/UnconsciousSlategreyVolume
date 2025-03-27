@@ -15,13 +15,14 @@ body {
 
 #nav_logo {
   margin: 0;
+  padding-left: 24px;
   font-weight: 900;
   font-family: 'Arial Black', Arial, sans-serif;
   font-size: 1.8rem;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  }
+}
 
 nav {
   display: flex;
@@ -91,16 +92,16 @@ nav {
 @media (max-width: 768px) {
   .nav_links {
     position: fixed;
-    top: 80px;
+    top: 88px;
     right: -100%;
     width: 100%;
     height: auto;
     background: #000000;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     transition: right 0.5s ease;
     z-index: 999;
-    padding: 1.5rem;
+    padding: 0;
     box-sizing: border-box;
   }
 
@@ -109,12 +110,18 @@ nav {
   }
 
   .nav_btn {
-    transform: skew(-20deg);
-    margin-right: 12px;
+    width: 100%;
+    transform: none;
+    border-right: none;
+    border-bottom: 12px solid #000000;
   }
 
   .nav_btn:last-child {
-    margin-right: 0;
+    border-bottom: none;
+  }
+
+  .nav_btn span {
+    transform: none;
   }
 }
 
