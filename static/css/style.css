@@ -16,8 +16,10 @@ nav {
 
 .nav_btn {
   margin-left: 1rem;
-  background-color:rebeccapurple;
-  color:white;
-  skew
+  background-color: rebeccapurple;
+  color: white;
+  transform: skew(-20deg);
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
 }
-
