@@ -16,7 +16,9 @@
 }
 
 .dashboard-container {
-    padding: 120px 5%;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 88px auto 0;
     color: white;
     min-height: 100vh;
     background: #000;
@@ -79,37 +81,32 @@
 
 .status-badge {
     display: inline-block;
-    padding: 4px 8px;
+    padding: 8px 20px;
     background: rebeccapurple;
     color: white;
     font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    border-radius: 4px;
+    font-size: 14px;
+    border-radius: 20px;
     margin-top: 10px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
 .action-button {
     background: rebeccapurple;
     border: none;
     color: white;
-    padding: 8px 16px;
-    font-family: 'Arial Black', Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: -1px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
     cursor: pointer;
-    transform: skew(-20deg);
     transition: all 0.3s ease;
 }
 
 .action-button:hover {
     background: #663399;
-    transform: skew(-20deg) scale(1.05);
 }
 
-.action-button span {
-    display: inline-block;
-    transform: skew(20deg);
-}
 
 .notifications {
     margin-bottom: 30px;
@@ -194,99 +191,6 @@
     height: 100px;
     resize: vertical;
 }
-.quote-details {
-    background: #1a1a1a;
-    padding: 30px;
-    margin-bottom: 30px;
-    border-left: 4px solid rebeccapurple;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.9rem;
-    margin: 10px 0;
-}
-
-.status-badge.pending { background: #ff9800; color: black; }
-.status-badge.quoted { background: #2196f3; color: white; }
-.status-badge.accepted { background: #4caf50; color: white; }
-.status-badge.rejected { background: #f44336; color: white; }
-
-.price {
-    font-size: 1.5rem;
-    color: #4caf50;
-    font-weight: bold;
-}
-
-.admin-actions, .client-actions {
-    margin-top: 20px;
-}
-
-.action-button {
-    background: rebeccapurple;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-family: 'Space Mono', monospace;
-    transition: background 0.3s ease;
-}
-
-.action-button:hover {
-    background: #663399;
-}
-
-.action-button.accept {
-    background: #4caf50;
-}
-
-.action-button.reject {
-    background: #f44336;
-    margin-left: 10px;
-}
-
-.messages-section {
-    background: #1a1a1a;
-    padding: 30px;
-    margin-top: 30px;
-    border-left: 4px solid rebeccapurple;
-}
-
-.message {
-    background: #2a2a2a;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-}
-
-.message small {
-    color: #999;
-    display: block;
-    margin-top: 5px;
-}
-
-.message-form {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-}
-
-.message-form input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    background: #2a2a2a;
-    border: none;
-    color: white;
-    font-family: 'Space Mono', monospace;
-}
-/* Dashboard Container */
-.dashboard-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 88px auto 0;
-}
 
 .quote-details {
     background: #1a1a1a;
@@ -299,21 +203,25 @@
 .quote-details h2 {
     color: white;
     margin-bottom: 15px;
+    font-size: 24px;
 }
 
 .description {
     color: #cccccc;
     font-family: 'Space Mono', monospace;
     margin-bottom: 20px;
+    line-height: 1.6;
 }
 
 .status-badge {
     display: inline-block;
-    padding: 5px 15px;
-    border-radius: 15px;
+    padding: 8px 20px;
+    border-radius: 20px;
     color: white;
     font-family: 'Space Mono', monospace;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
 .status-badge.pending { background: #f39c12; }
@@ -324,8 +232,8 @@
 .price {
     font-size: 24px;
     color: #2ecc71;
-    margin: 15px 0;
     font-family: 'Space Mono', monospace;
+    margin: 20px 0;
 }
 
 .admin-actions, .client-actions {
@@ -336,28 +244,41 @@
     background: rebeccapurple;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
+    border-radius: 4px;
     cursor: pointer;
     font-family: 'Space Mono', monospace;
+    transition: background 0.3s ease;
     margin-right: 10px;
-    transition: all 0.3s ease;
 }
 
 .action-button:hover {
     background: #663399;
 }
 
-.action-button.accept { background: #2ecc71; }
-.action-button.accept:hover { background: #27ae60; }
+.action-button.accept {
+    background: #2ecc71;
+}
 
-.action-button.reject { background: #e74c3c; }
-.action-button.reject:hover { background: #c0392b; }
+.action-button.accept:hover {
+    background: #27ae60;
+}
+
+.action-button.reject {
+    background: #e74c3c;
+    margin-left: 10px;
+}
+
+.action-button.reject:hover {
+    background: #c0392b;
+}
 
 .messages-section {
     background: #1a1a1a;
     padding: 30px;
-    border-radius: 8px;
+    margin-top: 30px;
     border-left: 4px solid rebeccapurple;
+    border-radius: 8px;
 }
 
 .messages-section h3 {
@@ -374,50 +295,55 @@
 .message {
     background: #2a2a2a;
     padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    margin: 10px 0;
+    border-radius: 5px;
+    color: white;
 }
 
 .message p {
-    color: white;
-    margin: 0 0 5px 0;
+    margin: 0;
     font-family: 'Space Mono', monospace;
 }
 
 .message small {
     color: #999;
-    font-size: 0.8rem;
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
 }
 
-.message-form {
+#messageForm {
     display: flex;
     gap: 10px;
 }
 
-.message-form input {
+#messageForm input[type="text"] {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     background: #2a2a2a;
     border: none;
+    border-radius: 4px;
     color: white;
     font-family: 'Space Mono', monospace;
 }
 
-.message-form input:focus {
-    outline: 1px solid rebeccapurple;
+#messageForm input[type="text"]:focus {
+    outline: 2px solid rebeccapurple;
 }
 
 input[type="number"] {
-    padding: 10px;
+    padding: 12px;
     background: #2a2a2a;
     border: none;
+    border-radius: 4px;
     color: white;
     font-family: 'Space Mono', monospace;
     margin-right: 10px;
+    width: 200px;
 }
 
 input[type="number"]:focus {
-    outline: 1px solid rebeccapurple;
+    outline: 2px solid rebeccapurple;
 }
 
 .section {
@@ -532,140 +458,4 @@ input[type="number"]:focus {
 
 .action-button:hover {
     background: #663399;
-}
-
-/* Quote Details Styles */
-.quote-details {
-    background: #1a1a1a;
-    border-left: 4px solid rebeccapurple;
-    padding: 30px;
-    margin-bottom: 30px;
-}
-
-.quote-details h2 {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.description {
-    color: #cccccc;
-    font-family: 'Space Mono', monospace;
-    margin-bottom: 20px;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 5px 10px;
-    color: white;
-    font-family: 'Space Mono', monospace;
-    text-transform: uppercase;
-    font-size: 0.8em;
-    margin-bottom: 20px;
-}
-
-.status-badge.pending {
-    background: #ffa500;
-}
-
-.status-badge.quoted {
-    background: #4169e1;
-}
-
-.status-badge.accepted {
-    background: #32cd32;
-}
-
-.status-badge.rejected {
-    background: #dc143c;
-}
-
-.price {
-    color: #32cd32;
-    font-size: 1.5em;
-    font-family: 'Space Mono', monospace;
-    margin-bottom: 20px;
-}
-
-.admin-actions,
-.client-actions {
-    margin-top: 20px;
-}
-
-.admin-actions form {
-    display: flex;
-    gap: 10px;
-}
-
-.admin-actions input[type="number"] {
-    padding: 10px;
-    background: #000;
-    border: none;
-    border-left: 2px solid rebeccapurple;
-    color: white;
-    font-family: 'Space Mono', monospace;
-}
-
-.client-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.accept {
-    background: #32cd32;
-}
-
-.reject {
-    background: #dc143c;
-}
-
-/* Messages Section */
-.messages-section {
-    background: #1a1a1a;
-    border-left: 4px solid rebeccapurple;
-    padding: 30px;
-}
-
-.messages-section h3 {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.messages-container {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-}
-
-.message {
-    background: #000;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-left: 2px solid rebeccapurple;
-}
-
-.message p {
-    color: white;
-    margin: 0 0 5px 0;
-    font-family: 'Space Mono', monospace;
-}
-
-.message small {
-    color: #cccccc;
-    font-size: 0.8em;
-    font-family: 'Space Mono', monospace;
-}
-
-.message-form {
-    display: flex;
-    gap: 10px;
-}
-
-.message-form input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    background: #000;
-    border: none;
-    border-left: 2px solid rebeccapurple;
-    color: white;
-    font-family: 'Space Mono', monospace;
 }
