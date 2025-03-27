@@ -177,23 +177,46 @@ def create_quote():
     return redirect(url_for('dashboard'))
 
 @app.route('/update_quote', methods=['POST'])
-@admin_required
+@login_required
 def update_quote():
     quote_id = request.form['quote_id']
     status = request.form['status']
     price = request.form.get('price')
-
+    
     db = get_db()
-    if status == 'accepted':
-        # Create project from quote
-        db.execute('INSERT INTO projects (quote_id, user_id) VALUES (?, ?)',
-                  [quote_id, session['user_id']])
-
-    db.execute('UPDATE quotes SET status = ?, price = ? WHERE id = ?',
-              [status, price, quote_id])
+    quote = db.execute('SELECT * FROM quotes WHERE id = ?', [quote_id]).fetchone()
+    
+    if not quote:
+        db.close()
+        return jsonify({'success': False, 'error': 'Quote not found'})
+    
+    if session.get('username') == 'admin' and price:
+        # Admin sending price quote
+        db.execute('UPDATE quotes SET status = ?, price = ? WHERE id = ?',
+                  ['quoted', price, quote_id])
+        # Notify user
+        db.execute('INSERT INTO notifications (user_id, content) VALUES (?, ?)',
+                  [quote['user_id'], f'New quote received for {quote["title"]}: ${price}'])
+    
+    elif session['user_id'] == quote['user_id'] and quote['status'] == 'quoted':
+        # User accepting or rejecting quote
+        db.execute('UPDATE quotes SET status = ? WHERE id = ?',
+                  [status, quote_id])
+        
+        if status == 'accepted':
+            # Create project when quote is accepted
+            db.execute('INSERT INTO projects (quote_id, user_id) VALUES (?, ?)',
+                      [quote_id, quote['user_id']])
+            # Notify admin
+            db.execute('INSERT INTO notifications (user_id, content) VALUES (?, ?)',
+                      [1, f'Quote #{quote_id} has been accepted'])
+        else:
+            # Notify admin of rejection
+            db.execute('INSERT INTO notifications (user_id, content) VALUES (?, ?)',
+                      [1, f'Quote #{quote_id} has been rejected'])
+    
     db.commit()
     db.close()
-
     return jsonify({'success': True})
 
 @app.route('/send_message', methods=['POST'])

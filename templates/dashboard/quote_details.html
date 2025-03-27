@@ -20,7 +20,7 @@
             
             {% if session.username == 'admin' and quote.status == 'pending' %}
             <div class="admin-actions">
-                <form onsubmit="submitQuoteResponse(event)">
+                <form id="priceForm">
                     <input type="number" name="price" placeholder="Enter price" required>
                     <input type="hidden" name="quote_id" value="{{ quote.id }}">
                     <button type="submit" class="action-button">Send Quote</button>
@@ -30,8 +30,8 @@
 
             {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
             <div class="client-actions">
-                <button onclick="respondToQuote({{ quote.id }}, 'accepted')" class="action-button accept">Accept</button>
-                <button onclick="respondToQuote({{ quote.id }}, 'rejected')" class="action-button reject">Reject</button>
+                <button onclick="respondToQuote('accepted')" class="action-button accept">Accept Quote</button>
+                <button onclick="respondToQuote('rejected')" class="action-button reject">Reject Quote</button>
             </div>
             {% endif %}
         </div>
@@ -46,42 +46,59 @@
                 </div>
                 {% endfor %}
             </div>
-            <form class="message-form" onsubmit="sendMessage(event)">
-                <input type="hidden" name="quote_id" value="{{ quote.id }}">
+            <form id="messageForm" class="message-form">
                 <input type="text" name="content" placeholder="Type your message..." required>
-                <button type="submit" class="action-button"><span>Send</span></button>
+                <button type="submit" class="action-button">Send</button>
             </form>
         </div>
     </div>
 
     <script>
-    function submitQuoteResponse(e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        fetch('/update_quote', {
-            method: 'POST',
-            body: formData
-        }).then(() => location.reload());
-    }
+        // Handle price submission
+        document.getElementById('priceForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/update_quote', {
+                method: 'POST',
+                body: formData
+            });
+            if (response.ok) {
+                location.reload();
+            }
+        });
 
-    function respondToQuote(quoteId, status) {
-        const formData = new FormData();
-        formData.append('quote_id', quoteId);
-        formData.append('status', status);
-        fetch('/update_quote', {
-            method: 'POST',
-            body: formData
-        }).then(() => location.reload());
-    }
+        // Handle quote response (accept/reject)
+        async function respondToQuote(status) {
+            const formData = new FormData();
+            formData.append('quote_id', '{{ quote.id }}');
+            formData.append('status', status);
+            
+            const response = await fetch('/update_quote', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                location.reload();
+            }
+        }
 
-    function sendMessage(e) {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        fetch('/send_message', {
-            method: 'POST',
-            body: formData
-        }).then(() => location.reload());
-    }
+        // Handle message submission
+        document.getElementById('messageForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            formData.append('quote_id', '{{ quote.id }}');
+            formData.append('receiver_id', '{{ 1 if session.user_id != 1 else quote.user_id }}');
+            
+            const response = await fetch('/send_message', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                location.reload();
+            }
+        });
     </script>
 </body>
 </html>
