@@ -281,3 +281,259 @@
     color: white;
     font-family: 'Space Mono', monospace;
 }
+/* Dashboard Container */
+.dashboard-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    background: #1a1a1a;
+    border-left: 4px solid rebeccapurple;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.section h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #000;
+    padding: 20px;
+    border-left: 4px solid rebeccapurple;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h4 {
+    color: white;
+    margin: 0 0 10px 0;
+}
+
+.card p {
+    color: #cccccc;
+    margin: 5px 0;
+    font-family: 'Space Mono', monospace;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    border-left: 4px solid rebeccapurple;
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 30px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    margin-bottom: 8px;
+    font-family: 'Space Mono', monospace;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: #000;
+    border: none;
+    border-left: 2px solid rebeccapurple;
+    color: white;
+    font-family: 'Space Mono', monospace;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.action-button {
+    background: rebeccapurple;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s ease;
+}
+
+.action-button:hover {
+    background: #663399;
+}
+
+/* Quote Details Styles */
+.quote-details {
+    background: #1a1a1a;
+    border-left: 4px solid rebeccapurple;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.quote-details h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.description {
+    color: #cccccc;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 20px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    color: white;
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-bottom: 20px;
+}
+
+.status-badge.pending {
+    background: #ffa500;
+}
+
+.status-badge.quoted {
+    background: #4169e1;
+}
+
+.status-badge.accepted {
+    background: #32cd32;
+}
+
+.status-badge.rejected {
+    background: #dc143c;
+}
+
+.price {
+    color: #32cd32;
+    font-size: 1.5em;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 20px;
+}
+
+.admin-actions,
+.client-actions {
+    margin-top: 20px;
+}
+
+.admin-actions form {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-actions input[type="number"] {
+    padding: 10px;
+    background: #000;
+    border: none;
+    border-left: 2px solid rebeccapurple;
+    color: white;
+    font-family: 'Space Mono', monospace;
+}
+
+.client-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.accept {
+    background: #32cd32;
+}
+
+.reject {
+    background: #dc143c;
+}
+
+/* Messages Section */
+.messages-section {
+    background: #1a1a1a;
+    border-left: 4px solid rebeccapurple;
+    padding: 30px;
+}
+
+.messages-section h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.messages-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.message {
+    background: #000;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 2px solid rebeccapurple;
+}
+
+.message p {
+    color: white;
+    margin: 0 0 5px 0;
+    font-family: 'Space Mono', monospace;
+}
+
+.message small {
+    color: #cccccc;
+    font-size: 0.8em;
+    font-family: 'Space Mono', monospace;
+}
+
+.message-form {
+    display: flex;
+    gap: 10px;
+}
+
+.message-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    background: #000;
+    border: none;
+    border-left: 2px solid rebeccapurple;
+    color: white;
+    font-family: 'Space Mono', monospace;
+}

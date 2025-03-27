@@ -153,12 +153,27 @@ def create_quote():
     description = request.form['description']
 
     db = get_db()
-    db.execute('INSERT INTO quotes (user_id, title, description) VALUES (?, ?, ?)',
-              [session['user_id'], title, description])
-    db.commit()
-    db.close()
+    try:
+        # Create quote
+        db.execute('INSERT INTO quotes (user_id, title, description) VALUES (?, ?, ?)',
+                  [session['user_id'], title, description])
+        
+        # Get admin user
+        admin = db.execute('SELECT id FROM users WHERE username = ?', ['admin']).fetchone()
+        
+        # Create notification for admin
+        if admin:
+            db.execute('INSERT INTO notifications (user_id, content) VALUES (?, ?)',
+                      [admin['id'], f'New quote request: {title}'])
+        
+        db.commit()
+        flash('Quote request submitted successfully')
+    except sqlite3.Error as e:
+        db.rollback()
+        flash('Error creating quote request')
+    finally:
+        db.close()
 
-    flash('Quote request submitted successfully')
     return redirect(url_for('dashboard'))
 
 @app.route('/update_quote', methods=['POST'])
