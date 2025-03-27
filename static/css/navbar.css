@@ -167,6 +167,75 @@ nav {
     flex-direction: row;
     justify-content: flex-end;
     transition: right 0.5s ease;
+
+.nav-center {
+    flex: 1;
+    text-align: center;
+}
+
+.username {
+    color: white;
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+}
+
+.notification-icon {
+    position: relative;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.notification-icon:before {
+    content: '🔔';
+    font-size: 1.5rem;
+    color: white;
+}
+
+.notification-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: rebeccapurple;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #1a1a1a;
+    min-width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    border-left: 4px solid rebeccapurple;
+    z-index: 1000;
+}
+
+.notification-dropdown.show {
+    display: block;
+}
+
+.notification-item {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.notification-item p {
+    color: white;
+    margin: 0 0 5px 0;
+    font-family: 'Space Mono', monospace;
+}
+
+.notification-item small {
+    color: #999;
+    font-size: 0.8rem;
+}
+
     z-index: 998;
     padding: 0;
     box-sizing: border-box;

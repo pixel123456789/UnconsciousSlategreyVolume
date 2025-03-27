@@ -103,8 +103,16 @@ def dashboard():
 @admin_required
 def admin_dashboard():
     db = get_db()
-    quotes = db.execute('SELECT * FROM quotes').fetchall()
-    projects = db.execute('SELECT * FROM projects').fetchall()
+    quotes = db.execute('''
+        SELECT quotes.*, users.username 
+        FROM quotes 
+        JOIN users ON quotes.user_id = users.id
+    ''').fetchall()
+    projects = db.execute('''
+        SELECT projects.*, users.username 
+        FROM projects 
+        JOIN users ON projects.user_id = users.id
+    ''').fetchall()
     notifications = db.execute('SELECT * FROM notifications WHERE user_id = ? AND is_read = 0',
                              [session['user_id']]).fetchall()
     db.close()
