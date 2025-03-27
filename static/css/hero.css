@@ -2,48 +2,12 @@
 .hero-section {
     position: relative;
     height: calc(100vh - 88px);
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
     overflow: hidden;
     display: flex;
     align-items: center;
     padding: 0 5%;
     animation: fadeIn 1s ease-out;
-    perspective: 10px;
-}
-
-.parallax-bg {
-    position: absolute;
-    top: -20%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-    background-size: cover;
-    transform-origin: 0 0;
-    transform: translateZ(-10px) scale(2);
-    z-index: -1;
-}
-
-.hero-stats {
-    display: flex;
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.stat {
-    text-align: center;
-}
-
-.stat .number {
-    font-family: 'Arial Black', Arial, sans-serif;
-    font-size: 2.5rem;
-    color: rebeccapurple;
-    display: block;
-}
-
-.stat .label {
-    font-family: 'Space Mono', monospace;
-    color: #cccccc;
-    font-size: 0.9rem;
 }
 
 @keyframes fadeIn {
