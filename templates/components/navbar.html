@@ -1,5 +1,24 @@
+
 <div id="nav">
-    <h3 id="nav_logo">InI development.</h3>
+    <h1 id="nav_logo">InI Development</h1>
+    <div class="nav-center">
+        {% if 'username' in session %}
+        <span class="username">{{ session.username }}</span>
+        <div class="notification-icon" onclick="toggleNotifications()">
+            {% if notifications|length > 0 %}
+            <span class="notification-count">{{ notifications|length }}</span>
+            {% endif %}
+        </div>
+        <div class="notification-dropdown" id="notificationDropdown">
+            {% for notification in notifications %}
+            <div class="notification-item">
+                <p>{{ notification.content }}</p>
+                <small>{{ notification.created_at }}</small>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
     <nav>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
@@ -7,25 +26,24 @@
             <div></div>
         </div>
         <div class="nav_links">
-            <div class="hamburger-nav" onclick="toggleMenu()"></div>
-            {% if logged_in %}
-                {% if username == 'admin' %}
-                    <a href="{{ url_for('admin_dashboard') }}"><button class="nav_btn"><span>Dashboard</span></button></a>
-                {% else %}
-                    <a href="{{ url_for('dashboard') }}"><button class="nav_btn"><span>Dashboard</span></button></a>
-                {% endif %}
-                <a href="{{ url_for('logout') }}"><button class="nav_btn"><span>Logout</span></button></a>
+            <button class="nav_btn" onclick="window.location.href='/'"><span>Home</span></button>
+            {% if 'user_id' not in session %}
+            <button class="nav_btn" onclick="window.location.href='/login'"><span>Login</span></button>
+            <button class="nav_btn" onclick="window.location.href='/register'" id="last_btn"><span>Register</span></button>
             {% else %}
-                <a href="{{ url_for('login') }}"><button class="nav_btn"><span>Login</span></button></a>
-                <a href="{{ url_for('register') }}"><button class="nav_btn"><span>Register</span></button></a>
+            <button class="nav_btn" onclick="window.location.href='/dashboard'"><span>Dashboard</span></button>
+            <button class="nav_btn" onclick="window.location.href='/logout'" id="last_btn"><span>Logout</span></button>
             {% endif %}
-            <a href="/about"><button class="nav_btn" id="last_btn"><span>About</span></button></a>
         </div>
     </nav>
 </div>
 <script>
-    function toggleMenu() {
-        document.querySelector('.hamburger').classList.toggle('active');
-        document.querySelector('.nav_links').classList.toggle('active');
-    }
+function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('active');
+    document.querySelector('.nav_links').classList.toggle('active');
+}
+
+function toggleNotifications() {
+    document.getElementById('notificationDropdown').classList.toggle('show');
+}
 </script>

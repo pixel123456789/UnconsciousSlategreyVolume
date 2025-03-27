@@ -13,9 +13,26 @@
         <div class="quote-details">
             <h2>{{ quote.title }}</h2>
             <p class="description">{{ quote.description }}</p>
-            <div class="status-badge">{{ quote.status }}</div>
+            <div class="status-badge {{ quote.status }}">{{ quote.status }}</div>
             {% if quote.price %}
             <p class="price">${{ quote.price }}</p>
+            {% endif %}
+            
+            {% if session.username == 'admin' and quote.status == 'pending' %}
+            <div class="admin-actions">
+                <form onsubmit="submitQuoteResponse(event)">
+                    <input type="number" name="price" placeholder="Enter price" required>
+                    <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                    <button type="submit" class="action-button">Send Quote</button>
+                </form>
+            </div>
+            {% endif %}
+
+            {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
+            <div class="client-actions">
+                <button onclick="respondToQuote({{ quote.id }}, 'accepted')" class="action-button accept">Accept</button>
+                <button onclick="respondToQuote({{ quote.id }}, 'rejected')" class="action-button reject">Reject</button>
+            </div>
             {% endif %}
         </div>
         
@@ -36,5 +53,35 @@
             </form>
         </div>
     </div>
+
+    <script>
+    function submitQuoteResponse(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        fetch('/update_quote', {
+            method: 'POST',
+            body: formData
+        }).then(() => location.reload());
+    }
+
+    function respondToQuote(quoteId, status) {
+        const formData = new FormData();
+        formData.append('quote_id', quoteId);
+        formData.append('status', status);
+        fetch('/update_quote', {
+            method: 'POST',
+            body: formData
+        }).then(() => location.reload());
+    }
+
+    function sendMessage(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        fetch('/send_message', {
+            method: 'POST',
+            body: formData
+        }).then(() => location.reload());
+    }
+    </script>
 </body>
 </html>

@@ -194,3 +194,90 @@
     height: 100px;
     resize: vertical;
 }
+.quote-details {
+    background: #1a1a1a;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-left: 4px solid rebeccapurple;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.status-badge.pending { background: #ff9800; color: black; }
+.status-badge.quoted { background: #2196f3; color: white; }
+.status-badge.accepted { background: #4caf50; color: white; }
+.status-badge.rejected { background: #f44336; color: white; }
+
+.price {
+    font-size: 1.5rem;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.admin-actions, .client-actions {
+    margin-top: 20px;
+}
+
+.action-button {
+    background: rebeccapurple;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    transition: background 0.3s ease;
+}
+
+.action-button:hover {
+    background: #663399;
+}
+
+.action-button.accept {
+    background: #4caf50;
+}
+
+.action-button.reject {
+    background: #f44336;
+    margin-left: 10px;
+}
+
+.messages-section {
+    background: #1a1a1a;
+    padding: 30px;
+    margin-top: 30px;
+    border-left: 4px solid rebeccapurple;
+}
+
+.message {
+    background: #2a2a2a;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.message small {
+    color: #999;
+    display: block;
+    margin-top: 5px;
+}
+
+.message-form {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.message-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    background: #2a2a2a;
+    border: none;
+    color: white;
+    font-family: 'Space Mono', monospace;
+}
