@@ -70,12 +70,12 @@
             const formData = new FormData();
             formData.append('quote_id', '{{ quote.id }}');
             formData.append('status', status);
-            
+
             const response = await fetch('/update_quote', {
                 method: 'POST',
                 body: formData
             });
-            
+
             if (response.ok) {
                 location.reload();
             }
@@ -86,12 +86,12 @@
             const formData = new FormData(e.target);
             formData.append('quote_id', '{{ quote.id }}');
             formData.append('receiver_id', '{{ 1 if session.user_id != 1 else quote.user_id }}');
-            
+
             const response = await fetch('/send_message', {
                 method: 'POST',
                 body: formData
             });
-            
+
             if (response.ok) {
                 location.reload();
             }
