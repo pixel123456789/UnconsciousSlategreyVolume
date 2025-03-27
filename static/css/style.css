@@ -36,13 +36,12 @@ nav {
   padding: 10px;
   z-index: 999;
   position: relative;
-  margin-right: 10px;
 }
 
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
-    margin-left: auto;
+    margin-left: 12px;
   }
 }
 
