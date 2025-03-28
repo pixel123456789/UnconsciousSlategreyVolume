@@ -2,29 +2,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Project Details</title>
-    <link rel="stylesheet" href="/static/css/navbar.css">
-    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <title>Project Details - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
     {% include 'components/navbar.html' %}
     <div class="dashboard-container">
-        <div class="project-details">
-            <div class="project-header">
-                <h2>{{ project.title }}</h2>
-                <div class="status-badge {{ project.status }}">{{ project.status }}</div>
+        <div class="project-header">
+            <h2>{{ project.title }}</h2>
+            <div class="status-badge {{ project.status }}">{{ project.status }}</div>
+            <div class="project-meta">
+                <p>Client: {{ project.username }}</p>
+                <p>Started: {{ project.start_date }}</p>
+                {% if project.end_date %}
+                    <p>Completed: {{ project.end_date }}</p>
+                {% endif %}
             </div>
-            <p class="description">{{ project.description }}</p>
-            
-            {% if session.get('is_admin') %}
-            <div class="project-controls">
-                <div class="progress-section">
-                    <label>Progress:</label>
-                    <input type="range" min="0" max="100" value="{{ project.progress }}" id="progressSlider">
-                    <span id="progressValue">{{ project.progress }}%</span>
+        </div>
+
+        <div class="project-details">
+            <div class="project-section">
+                <h3>Project Overview</h3>
+                <p>{{ project.description }}</p>
+            </div>
+
+            <div class="project-section">
+                <h3>Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ project.progress }}%">
+                        <span>{{ project.progress }}%</span>
+                    </div>
                 </div>
-                <div class="status-section">
-                    <label>Status:</label>
+
+                {% if session.is_admin %}
+                <div class="progress-update">
+                    <input type="range" id="progressSlider" min="0" max="100" value="{{ project.progress }}" 
+                           oninput="document.getElementById('progressValue').textContent = this.value">
+                    <span id="progressValue">{{ project.progress }}</span>%
+                    <button onclick="updateProgress()" class="action-button">Update Progress</button>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="project-section">
+                <h3>Milestones</h3>
+                <div class="milestones">
+                    {% if session.is_admin %}
+                    <form id="milestoneForm" onsubmit="addMilestone(event)">
+                        <input type="text" name="title" placeholder="Milestone title" required>
+                        <input type="date" name="due_date" required>
+                        <button type="submit" class="action-button">Add Milestone</button>
+                    </form>
+                    {% endif %}
+                    <div id="milestonesList" class="milestones-list">
+                        <!-- Milestones will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h3>Tasks</h3>
+                <div class="tasks">
+                    {% if session.is_admin %}
+                    <form id="taskForm" onsubmit="addTask(event)">
+                        <input type="text" name="title" placeholder="Task title" required>
+                        <select name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <button type="submit" class="action-button">Add Task</button>
+                    </form>
+                    {% endif %}
+                    <div id="tasksList" class="tasks-list">
+                        <!-- Tasks will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h3>Files & Resources</h3>
+                <div class="files">
+                    {% if session.is_admin %}
+                    <form id="fileForm" onsubmit="uploadFile(event)">
+                        <input type="file" name="file" required>
+                        <button type="submit" class="action-button">Upload File</button>
+                    </form>
+                    {% endif %}
+                    <div id="filesList" class="files-list">
+                        <!-- Files will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-section">
+                <h3>Communication</h3>
+                <div class="messages-container">
+                    {% for message in messages %}
+                    <div class="message {% if message.sender_id == session.user_id %}sent{% else %}received{% endif %}">
+                        <p>{{ message.content }}</p>
+                        <small>{{ message.sender_name }} - {{ message.created_at }}</small>
+                    </div>
+                    {% endfor %}
+                </div>
+                <form id="messageForm" onsubmit="sendMessage(event)">
+                    <input type="text" name="content" placeholder="Type your message..." required>
+                    <button type="submit" class="action-button">Send</button>
+                </form>
+            </div>
+
+            {% if session.is_admin %}
+            <div class="project-section">
+                <h3>Project Status</h3>
+                <div class="status-update">
                     <select id="statusSelect">
                         {% for status in statuses %}
                         <option value="{{ status }}" {% if status == project.status %}selected{% endif %}>
@@ -32,42 +124,41 @@
                         </option>
                         {% endfor %}
                     </select>
-                    <button onclick="updateProject()" class="action-button">Update</button>
+                    <button onclick="updateStatus()" class="action-button">Update Status</button>
                 </div>
-            </div>
-            {% else %}
-            <div class="project-progress">
-                <div class="progress-bar">
-                    <div class="progress" style="width: {{ project.progress }}%"></div>
-                </div>
-                <span class="progress-text">{{ project.progress }}% Complete</span>
             </div>
             {% endif %}
-        </div>
-
-        <div class="messages-section">
-            <h3>Project Communication</h3>
-            <div class="messages-container">
-                {% for message in messages %}
-                <div class="message {% if message.sender_id == session.user_id %}sent{% else %}received{% endif %}">
-                    <p>{{ message.content }}</p>
-                    <small>{{ message.created_at }}</small>
-                </div>
-                {% endfor %}
-            </div>
-            <form id="messageForm" onsubmit="sendMessage(event)">
-                <input type="text" name="content" placeholder="Type your message..." required>
-                <button type="submit" class="action-button">Send</button>
-            </form>
         </div>
     </div>
 
     <script>
-        async function updateProject() {
+        async function updateProgress() {
+            const progress = document.getElementById('progressSlider').value;
             const formData = new FormData();
             formData.append('project_id', '{{ project.id }}');
-            formData.append('status', document.getElementById('statusSelect').value);
-            formData.append('progress', document.getElementById('progressSlider').value);
+            formData.append('status', '{{ project.status }}');
+            formData.append('progress', progress);
+            
+            try {
+                const response = await fetch('/update_project', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function updateStatus() {
+            const status = document.getElementById('statusSelect').value;
+            const formData = new FormData();
+            formData.append('project_id', '{{ project.id }}');
+            formData.append('status', status);
             
             try {
                 const response = await fetch('/update_project', {
@@ -103,12 +194,6 @@
             } catch (error) {
                 console.error('Error:', error);
             }
-        }
-
-        if (document.getElementById('progressSlider')) {
-            document.getElementById('progressSlider').addEventListener('input', function() {
-                document.getElementById('progressValue').textContent = this.value + '%';
-            });
         }
     </script>
 </body>

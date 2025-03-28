@@ -69,6 +69,32 @@ def init_db():
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (quote_id) REFERENCES quotes (id),
                     FOREIGN KEY (user_id) REFERENCES users (id))''')
+                    
+        c.execute('''CREATE TABLE IF NOT EXISTS milestones
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    project_id INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    due_date DATE,
+                    completed BOOLEAN DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (project_id) REFERENCES projects (id))''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS tasks
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    project_id INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    priority TEXT CHECK (priority IN ('low', 'medium', 'high')),
+                    completed BOOLEAN DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (project_id) REFERENCES projects (id))''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS project_files
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    project_id INTEGER NOT NULL,
+                    filename TEXT NOT NULL,
+                    file_path TEXT NOT NULL,
+                    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (project_id) REFERENCES projects (id))''')
 
         c.execute('''CREATE TABLE IF NOT EXISTS messages
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
