@@ -6,7 +6,10 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+app.config['PERMANENT_SESSION_LIFETIME'] = 1800  # 30 minutes
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
 
 def get_db():
     conn = sqlite3.connect('instance/database.db')
