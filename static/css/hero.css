@@ -93,7 +93,7 @@
 .shape {
     position: absolute;
     background: rebeccapurple;
-    opacity: 0.1;
+    opacity: 0.5;
     animation: float 6s ease-in-out infinite;
 }
 
