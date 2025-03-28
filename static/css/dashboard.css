@@ -3,9 +3,7 @@
     max-width: 1200px;
     margin: 2rem auto;
     padding: 1rem;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1.5rem;
+    color: white;
 }
 
 /* Header Section */
@@ -55,23 +53,25 @@
 /* Cards Grid */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
 }
 
 .card {
-    background: #2a2a2a;
+    background: #1a1a1a;
     border-radius: 8px;
     padding: 1.5rem;
-    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     cursor: pointer;
-    border-left: 2px solid rebeccapurple;
+    transition: transform 0.2s;
+    border-left: 4px solid rebeccapurple;
+    color: white;
 }
 
 .card:hover {
     transform: translateY(-3px);
-    background: #333;
+    background: #2a2a2a;
 }
 
 /* Project Details */
@@ -84,6 +84,7 @@
     padding: 2rem;
     margin-bottom: 2rem;
     border-left: 4px solid rebeccapurple;
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -131,16 +132,18 @@
     font-size: 0.9rem;
     font-weight: 500;
     margin: 0.5rem 0;
+    background: rebeccapurple;
+    color: white;
 }
 
-.pending { background: #2c2c54; color: #ffd700; }
-.quoted { background: #2c3e50; color: #3498db; }
-.accepted { background: #27ae60; color: #fff; }
-.rejected { background: #c0392b; color: #fff; }
-.planning { background: #2c3e50; color: #fff; }
-.in_progress { background: #8e44ad; color: #fff; }
-.review { background: #d35400; color: #fff; }
-.completed { background: #27ae60; color: #fff; }
+.pending { background: #663399; }
+.quoted { background: #9370DB; }
+.accepted { background: #483D8B; }
+.rejected { background: #4B0082; }
+.planning { background: #663399; }
+.in_progress { background: #9370DB; }
+.review { background: #483D8B; }
+.completed { background: #4B0082; }
 
 /* Form Elements */
 .form-group {
@@ -176,15 +179,17 @@
 
 /* Quote and Project Details */
 .quote-details, .project-details {
-    background: white;
+    background: #1a1a1a;
     border-radius: 8px;
     padding: 2rem;
     margin-bottom: 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid rebeccapurple;
+    color: white;
 }
 
 .description {
-    color: #666;
+    color: #cccccc;
     margin: 1rem 0;
     line-height: 1.6;
 }
@@ -193,25 +198,18 @@
 .progress-bar {
     width: 100%;
     height: 20px;
-    background: #e9ecef;
+    background: #333;
     border-radius: 10px;
-    margin: 1rem 0;
     overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: #4CAF50;
-    transition: width 0.3s ease;
+    margin: 1rem 0;
 }
 
 /* Messages Section */
 .messages-section {
-    background: white;
-    border-radius: 8px;
+    background: #1a1a1a;
     padding: 1.5rem;
-    margin-top: 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    border-left: 4px solid rebeccapurple;
 }
 
 .messages-container {
@@ -221,303 +219,34 @@
 }
 
 .message {
+    background: #2a2a2a;
     padding: 1rem;
-    border-bottom: 1px solid #eee;
-}
-
-.message:last-child {
-    border-bottom: none;
-}
-
-/* Forms and Buttons */
-.action-button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.2s;
-}
-
-.action-button:hover {
-    background: #45a049;
-}
-
-.reject { background: #dc3545; }
-.reject:hover { background: #c82333; }
-
-input[type="text"],
-input[type="number"],
-textarea {
-    width: 100%;
-    padding: 0.8rem;
     margin: 0.5rem 0;
-    border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 1rem;
-}
-
-/* Admin Controls */
-.admin-controls {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.admin-controls select,
-.admin-controls input {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Project Timeline */
-.project-timeline {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.timeline {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    position: relative;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: #ddd;
-    z-index: 1;
-}
-
-.milestone {
-    position: relative;
-    background: #fff;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    z-index: 2;
-    color: #666;
-}
-
-.milestone.active {
-    border-color: #4CAF50;
-    color: #4CAF50;
-    font-weight: bold;
-}
-
-.messages-container {
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.message {
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 8px;
-    max-width: 80%;
-}
-
-.message.sent {
-    background: #e3f2fd;
-    margin-left: auto;
-}
-
-.message.received {
-    background: #f5f5f5;
-    margin-right: auto;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 14px;
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.status-badge.planning { background: #e3f2fd; color: #1976d2; }
-.status-badge.in_progress { background: #fff3e0; color: #f57c00; }
-.status-badge.review { background: #e8f5e9; color: #388e3c; }
-.status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
-
-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-input[type="text"], input[type="number"], input[type="date"], select {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    flex: 1;
-}
-
-.action-button {
-    background: #4CAF50;
     color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
 }
 
-.action-button:hover {
-    background: #388E3C;
-}
-
-.project-controls {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.progress-section, .status-section {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #e9ecef;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-
-.section {
-    background: #1a1a1a;
-    border-left: 4px solid rebeccapurple;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
-.section h3 {
-    color: white;
-    margin-bottom: 20px;
-}
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: #000;
-    padding: 20px;
-    border-left: 4px solid rebeccapurple;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h4 {
-    color: white;
-    margin: 0 0 10px 0;
-}
-
-.card p {
-    color: #cccccc;
-    margin: 5px 0;
-    font-family: 'Space Mono', monospace;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-}
-
-.modal-content {
-    background: #1a1a1a;
-    border-left: 4px solid rebeccapurple;
-    max-width: 500px;
-    margin: 100px auto;
-    padding: 30px;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    color: white;
-    margin-bottom: 8px;
-    font-family: 'Space Mono', monospace;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
+/* Forms */
+input, textarea {
     background: #000;
     border: none;
     border-left: 2px solid rebeccapurple;
     color: white;
-    font-family: 'Space Mono', monospace;
+    padding: 0.8rem;
+    width: 100%;
+    margin: 0.5rem 0;
 }
 
-.form-group textarea {
-    height: 150px;
-    resize: vertical;
-}
-
-.action-button {
+button {
     background: rebeccapurple;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 0.8rem 1.5rem;
     cursor: pointer;
-    font-family: 'Space Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background 0.3s ease;
+    transform: skew(-20deg);
 }
 
-.action-button:hover {
+button:hover {
     background: #663399;
 }
 
