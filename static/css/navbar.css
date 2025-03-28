@@ -74,12 +74,13 @@
 @media (max-width: 768px) {
   .hamburger {
     display: block;
+    z-index: 1001;
   }
 
   .nav_links {
     position: fixed;
     top: 88px;
-    left: -100%;
+    right: -100%;
     width: 100%;
     height: calc(100vh - 88px);
     background: #1a1a1a;
@@ -87,10 +88,11 @@
     justify-content: flex-start;
     padding-top: 20px;
     transition: 0.3s ease;
+    z-index: 1000;
   }
 
   .nav_links.active {
-    left: 0;
+    right: 0;
   }
 
   .nav_btn {

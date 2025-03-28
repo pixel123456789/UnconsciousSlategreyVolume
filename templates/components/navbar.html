@@ -1,3 +1,4 @@
+
 <div id="nav">
     <h1 id="nav_logo">InI Development</h1>
     <div class="nav-center">
@@ -19,7 +20,7 @@
         {% endif %}
     </div>
     <nav>
-        <div class="hamburger" onclick="toggleMenu()">
+        <div class="hamburger">
             <div></div>
             <div></div>
             <div></div>
@@ -35,15 +36,5 @@
             {% endif %}
         </div>
     </nav>
-<script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </div>
-<script>
-function toggleMenu() {
-    document.querySelector('.hamburger').classList.toggle('active');
-    document.querySelector('.nav_links').classList.toggle('active');
-}
-
-function toggleNotifications() {
-    document.getElementById('notificationDropdown').classList.toggle('show');
-}
-</script>
+<script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
