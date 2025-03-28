@@ -373,7 +373,9 @@ def update_quote():
                     SET status = ?, price = ?, updated_at = CURRENT_TIMESTAMP 
                     WHERE id = ?
                 ''', [status, price, quote_id])
-            
+            except ValueError:
+                return jsonify({'success': False, 'error': 'Invalid price format'})  # Handle the error appropriately
+
             db.execute('''
                 INSERT INTO notifications (user_id, content, type) 
                 VALUES (?, ?, ?)
