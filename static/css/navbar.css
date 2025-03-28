@@ -73,18 +73,19 @@
 
 .close-nav {
   display: none;
-  position: absolute;
-  left: 15px;
-  top: 30px;
+  position: fixed;
+  left: 20px;
+  top: 32px;
   cursor: pointer;
   z-index: 1002;
   color: white;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
+  text-shadow: 0 0 4px rgba(0,0,0,0.5);
 }
 
 @media (max-width: 768px) {
-  .nav_links.active ~ .close-nav {
+  .nav_links.active + .close-nav {
     display: block;
   }
 }
