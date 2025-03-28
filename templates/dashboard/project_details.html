@@ -11,26 +11,115 @@
     {% include 'components/navbar.html' %}
     <div class="dashboard-container">
         <div class="project-details">
-            <h2>Project #{{ project.id }}</h2>
-            <div class="status-badge">{{ project.status }}</div>
+            <h2>Project #{{ project.id }} - {{ project.title }}</h2>
+            <div class="project-overview">
+                <div class="status-section">
+                    <div class="status-badge {{ project.status }}">{{ project.status }}</div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: {{ project.progress }}%">{{ project.progress }}%</div>
+                    </div>
+                </div>
+                {% if session.is_admin %}
+                <div class="admin-controls">
+                    <select id="statusSelect" onchange="updateProjectStatus(this.value)">
+                        <option value="planning" {% if project.status == 'planning' %}selected{% endif %}>Planning</option>
+                        <option value="design" {% if project.status == 'design' %}selected{% endif %}>Design</option>
+                        <option value="development" {% if project.status == 'development' %}selected{% endif %}>Development</option>
+                        <option value="testing" {% if project.status == 'testing' %}selected{% endif %}>Testing</option>
+                        <option value="review" {% if project.status == 'review' %}selected{% endif %}>Review</option>
+                        <option value="completed" {% if project.status == 'completed' %}selected{% endif %}>Completed</option>
+                    </select>
+                    <input type="number" id="progressInput" value="{{ project.progress }}" min="0" max="100" onchange="updateProgress(this.value)">
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="project-timeline">
+                <h3>Development Timeline</h3>
+                <div class="timeline">
+                    <div class="milestone {% if project.status in ['planning', 'design', 'development', 'testing', 'review', 'completed'] %}active{% endif %}">Planning</div>
+                    <div class="milestone {% if project.status in ['design', 'development', 'testing', 'review', 'completed'] %}active{% endif %}">Design</div>
+                    <div class="milestone {% if project.status in ['development', 'testing', 'review', 'completed'] %}active{% endif %}">Development</div>
+                    <div class="milestone {% if project.status in ['testing', 'review', 'completed'] %}active{% endif %}">Testing</div>
+                    <div class="milestone {% if project.status in ['review', 'completed'] %}active{% endif %}">Review</div>
+                    <div class="milestone {% if project.status == 'completed' %}active{% endif %}">Completed</div>
+                </div>
+            </div>
         </div>
         
         <div class="messages-section">
-            <h3>Messages</h3>
+            <h3>Project Communication</h3>
             <div class="messages-container">
                 {% for message in messages %}
-                <div class="message">
-                    <p>{{ message.content }}</p>
-                    <small>{{ message.created_at }}</small>
+                <div class="message {% if message.sender_id == session.user_id %}sent{% else %}received{% endif %}">
+                    <div class="message-content">
+                        <strong>{{ message.sender_name }}</strong>
+                        <p>{{ message.content }}</p>
+                        <small>{{ message.created_at }}</small>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
             <form class="message-form" onsubmit="sendMessage(event)">
                 <input type="hidden" name="project_id" value="{{ project.id }}">
                 <input type="text" name="content" placeholder="Type your message..." required>
-                <button type="submit" class="action-button"><span>Send</span></button>
+                <button type="submit" class="action-button">Send</button>
             </form>
         </div>
     </div>
+
+    <script>
+        async function updateProjectStatus(status) {
+            const formData = new FormData();
+            formData.append('project_id', '{{ project.id }}');
+            formData.append('status', status);
+            
+            try {
+                const response = await fetch('/update_project', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) location.reload();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function updateProgress(progress) {
+            const formData = new FormData();
+            formData.append('project_id', '{{ project.id }}');
+            formData.append('status', document.getElementById('statusSelect').value);
+            formData.append('progress', progress);
+            
+            try {
+                const response = await fetch('/update_project', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) location.reload();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            formData.append('receiver_id', '{{ 1 if session.username != "admin" else project.user_id }}');
+            
+            try {
+                const response = await fetch('/send_message', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                if (data.success) location.reload();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
 </body>
 </html>
