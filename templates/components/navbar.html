@@ -3,7 +3,7 @@
     <h1 id="nav_logo">InI Development</h1>
     <div class="nav-center">
         {% if 'username' in session %}
-        <span class="username">{{ session.username }}</span>
+        <div class="username"><span>{{ session.username }}</span></div>
         {% if notifications|length > 0 %}
         <div class="notification-icon" onclick="toggleNotifications()">
             <span class="notification-count">{{ notifications|length }}</span>
