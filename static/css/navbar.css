@@ -85,7 +85,7 @@
 }
 
 @media (max-width: 768px) {
-  .nav_links.active + .close-nav {
+  .nav_links.active ~ .close-nav {
     display: block;
   }
 }
