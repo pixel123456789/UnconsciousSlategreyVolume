@@ -394,6 +394,9 @@ def update_quote():
                     VALUES (?, ?, ?)
                 ''', [quote_id, quote['user_id'], date.today()])
                 
+                # Delete the quote after creating the project
+                db.execute('DELETE FROM quotes WHERE id = ?', [quote_id])
+                
                 admin = db.execute('SELECT id FROM users WHERE is_admin = 1').fetchone()
                 if admin:
                     db.execute('''

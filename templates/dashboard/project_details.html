@@ -2,66 +2,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Project Details - InI Development</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <title>Project Details</title>
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
 </head>
 <body>
     {% include 'components/navbar.html' %}
     <div class="dashboard-container">
         <div class="project-details">
-            <h2>Project #{{ project.id }} - {{ project.title }}</h2>
-            <div class="project-overview">
+            <div class="project-header">
+                <h2>{{ project.title }}</h2>
+                <div class="status-badge {{ project.status }}">{{ project.status }}</div>
+            </div>
+            <p class="description">{{ project.description }}</p>
+            
+            {% if session.get('is_admin') %}
+            <div class="project-controls">
+                <div class="progress-section">
+                    <label>Progress:</label>
+                    <input type="range" min="0" max="100" value="{{ project.progress }}" id="progressSlider">
+                    <span id="progressValue">{{ project.progress }}%</span>
+                </div>
                 <div class="status-section">
-                    <div class="status-badge {{ project.status }}">{{ project.status }}</div>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: {{ project.progress }}%">{{ project.progress }}%</div>
-                    </div>
-                </div>
-                {% if session.is_admin %}
-                <div class="admin-controls">
-                    <select id="statusSelect" onchange="updateProjectStatus(this.value)">
-                        <option value="planning" {% if project.status == 'planning' %}selected{% endif %}>Planning</option>
-                        <option value="design" {% if project.status == 'design' %}selected{% endif %}>Design</option>
-                        <option value="development" {% if project.status == 'development' %}selected{% endif %}>Development</option>
-                        <option value="testing" {% if project.status == 'testing' %}selected{% endif %}>Testing</option>
-                        <option value="review" {% if project.status == 'review' %}selected{% endif %}>Review</option>
-                        <option value="completed" {% if project.status == 'completed' %}selected{% endif %}>Completed</option>
+                    <label>Status:</label>
+                    <select id="statusSelect">
+                        {% for status in statuses %}
+                        <option value="{{ status }}" {% if status == project.status %}selected{% endif %}>
+                            {{ status.replace('_', ' ').title() }}
+                        </option>
+                        {% endfor %}
                     </select>
-                    <input type="number" id="progressInput" value="{{ project.progress }}" min="0" max="100" onchange="updateProgress(this.value)">
-                </div>
-                {% endif %}
-            </div>
-
-            <div class="project-timeline">
-                <h3>Development Timeline</h3>
-                <div class="timeline">
-                    <div class="milestone {% if project.status in ['planning', 'design', 'development', 'testing', 'review', 'completed'] %}active{% endif %}">Planning</div>
-                    <div class="milestone {% if project.status in ['design', 'development', 'testing', 'review', 'completed'] %}active{% endif %}">Design</div>
-                    <div class="milestone {% if project.status in ['development', 'testing', 'review', 'completed'] %}active{% endif %}">Development</div>
-                    <div class="milestone {% if project.status in ['testing', 'review', 'completed'] %}active{% endif %}">Testing</div>
-                    <div class="milestone {% if project.status in ['review', 'completed'] %}active{% endif %}">Review</div>
-                    <div class="milestone {% if project.status == 'completed' %}active{% endif %}">Completed</div>
+                    <button onclick="updateProject()" class="action-button">Update</button>
                 </div>
             </div>
+            {% else %}
+            <div class="project-progress">
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ project.progress }}%"></div>
+                </div>
+                <span class="progress-text">{{ project.progress }}% Complete</span>
+            </div>
+            {% endif %}
         </div>
-        
+
         <div class="messages-section">
             <h3>Project Communication</h3>
             <div class="messages-container">
                 {% for message in messages %}
                 <div class="message {% if message.sender_id == session.user_id %}sent{% else %}received{% endif %}">
-                    <div class="message-content">
-                        <strong>{{ message.sender_name }}</strong>
-                        <p>{{ message.content }}</p>
-                        <small>{{ message.created_at }}</small>
-                    </div>
+                    <p>{{ message.content }}</p>
+                    <small>{{ message.created_at }}</small>
                 </div>
                 {% endfor %}
             </div>
-            <form class="message-form" onsubmit="sendMessage(event)">
-                <input type="hidden" name="project_id" value="{{ project.id }}">
+            <form id="messageForm" onsubmit="sendMessage(event)">
                 <input type="text" name="content" placeholder="Type your message..." required>
                 <button type="submit" class="action-button">Send</button>
             </form>
@@ -69,36 +63,22 @@
     </div>
 
     <script>
-        async function updateProjectStatus(status) {
-            const formData = new FormData();
-            formData.append('project_id', '{{ project.id }}');
-            formData.append('status', status);
-            
-            try {
-                const response = await fetch('/update_project', {
-                    method: 'POST',
-                    body: formData
-                });
-                const data = await response.json();
-                if (data.success) location.reload();
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        }
-
-        async function updateProgress(progress) {
+        async function updateProject() {
             const formData = new FormData();
             formData.append('project_id', '{{ project.id }}');
             formData.append('status', document.getElementById('statusSelect').value);
-            formData.append('progress', progress);
+            formData.append('progress', document.getElementById('progressSlider').value);
             
             try {
                 const response = await fetch('/update_project', {
                     method: 'POST',
                     body: formData
                 });
+                
                 const data = await response.json();
-                if (data.success) location.reload();
+                if (data.success) {
+                    location.reload();
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -107,6 +87,7 @@
         async function sendMessage(e) {
             e.preventDefault();
             const formData = new FormData(e.target);
+            formData.append('project_id', '{{ project.id }}');
             formData.append('receiver_id', '{{ 1 if session.username != "admin" else project.user_id }}');
             
             try {
@@ -114,11 +95,20 @@
                     method: 'POST',
                     body: formData
                 });
+                
                 const data = await response.json();
-                if (data.success) location.reload();
+                if (data.success) {
+                    location.reload();
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
+        }
+
+        if (document.getElementById('progressSlider')) {
+            document.getElementById('progressSlider').addEventListener('input', function() {
+                document.getElementById('progressValue').textContent = this.value + '%';
+            });
         }
     </script>
 </body>
