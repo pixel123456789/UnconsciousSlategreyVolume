@@ -407,6 +407,10 @@ def mark_notification_read():
     return jsonify({'success': True})
 
 if __name__ == '__main__':
-    from database import init_db
+    from database import init_db, get_db
+    # Initialize database
     init_db()
+    # Verify database was created
+    with get_db() as db:
+        db.execute('SELECT 1')
     app.run(host='0.0.0.0', port=5000)
