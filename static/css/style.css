@@ -112,6 +112,9 @@ body {
 }
 
 @media (max-width: 768px) {
+  .close-nav.active {
+    display: block;
+  }
   .hamburger {
     display: block;
   }

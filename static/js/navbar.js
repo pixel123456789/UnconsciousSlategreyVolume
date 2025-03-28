@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
+        closeNav.classList.toggle('active');
     });
 
     // Close menu when clicking outside
