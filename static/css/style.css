@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 
 /* Base Styles */
@@ -71,84 +70,6 @@ body {
   transform: skew(20deg);
 }
 
-/* Mobile Navigation */
-.hamburger {
-  display: none;
-  cursor: pointer;
-  padding: 15px;
-  z-index: 1001;
-}
-
-.hamburger div {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 5px 0;
-  transition: 0.3s;
-}
-
-.close-nav {
-  display: none;
-  position: fixed;
-  left: 20px;
-  top: 20px;
-  cursor: pointer;
-  z-index: 1002;
-  color: white;
-  font-size: 32px;
-  font-weight: bold;
-  background: rebeccapurple;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 44px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.close-nav:hover {
-  background: #663399;
-  transform: scale(1.1);
-}
-
-@media (max-width: 768px) {
-  .close-nav.active {
-    display: block;
-  }
-  .hamburger {
-    display: block;
-  }
-
-  .nav_links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100vh;
-    background: #1a1a1a;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s ease;
-    z-index: 999;
-  }
-
-  .nav_links.active {
-    right: 0;
-  }
-
-  .nav_links.active ~ .close-nav {
-    display: block;
-  }
-
-  .nav_btn {
-    width: 100%;
-    height: 88px;
-    border-right: none;
-    border-bottom: 8px solid #000000;
-  }
-}
-
 /* Dashboard Layout */
 .dashboard-container {
   max-width: 1200px;
@@ -207,12 +128,41 @@ body {
   font-size: 14px;
   font-weight: 500;
   text-transform: capitalize;
+  background: rebeccapurple;
+  color: white;
 }
 
-.status-badge.planning { background: #e3f2fd; color: #1976d2; }
-.status-badge.in_progress { background: #fff3e0; color: #f57c00; }
-.status-badge.review { background: #e8f5e9; color: #388e3c; }
-.status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
+/* Forms and Inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  border: none;
+  border-left: 2px solid rebeccapurple;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-left: 4px solid rebeccapurple;
+}
+
+/* Buttons */
+.action-button {
+  padding: 0.75rem 1.5rem;
+  background: rebeccapurple;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transform: skew(-20deg);
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background: #663399;
+}
 
 /* Messages Section */
 .messages-section {
@@ -238,23 +188,6 @@ body {
   border-left: 2px solid rebeccapurple;
 }
 
-/* Forms and Inputs */
-input, select, textarea {
-  width: 100%;
-  padding: 12px;
-  background: #000;
-  border: none;
-  border-left: 2px solid rebeccapurple;
-  color: white;
-  font-family: 'Space Mono', monospace;
-  margin-bottom: 1rem;
-}
-
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-left: 4px solid rebeccapurple;
-}
-
 /* Authentication */
 .auth-container {
   max-width: 400px;
@@ -265,95 +198,143 @@ input:focus, select:focus, textarea:focus {
   border-radius: 8px;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 12px;
-  background: #000;
-  border: none;
-  border-left: 2px solid rebeccapurple;
-  color: white;
-  font-family: 'Space Mono', monospace;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-left: 4px solid rebeccapurple;
-  transform: translateX(5px);
-}
-
-/* Buttons */
-.action-button {
-  padding: 0.75rem 1.5rem;
-  background: rebeccapurple;
-  color: white;
-  border: none;
+/* Mobile Navigation */
+.hamburger {
+  display: none;
   cursor: pointer;
-  transform: skew(-20deg);
-  transition: all 0.3s ease;
+  padding: 15px;
+  z-index: 1001;
 }
 
-.action-button:hover {
-  background: #663399;
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: 0.3s;
 }
 
-/* Project Details */
-.quote-details, .project-details {
-  background: #000000;
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-left: 4px solid rebeccapurple;
-  color: white;
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav_links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: #1a1a1a;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav_links.active {
+    right: 0;
+  }
+
+  .nav_btn {
+    width: 100%;
+    height: 88px;
+    border-right: none;
+    border-bottom: 8px solid #000000;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.description {
-  color: #808080;
-  margin: 1rem 0;
-  line-height: 1.6;
+.services {
+    padding: 100px 5%;
+    background: #1a1a1a;
 }
 
-.messages-section {
-  background: #1a1a1a;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border-left: 4px solid rebeccapurple;
+.services h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 50px;
 }
 
-.message {
-  background: #000000;
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 4px;
-  border-left: 2px solid rebeccapurple;
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
 }
 
-.message small {
-  color: #808080;
+.service-card {
+    background: #000;
+    padding: 30px;
+    border-left: 4px solid rebeccapurple;
+    transition: transform 0.3s ease;
 }
 
-/* Progress Bar */
-.progress-bar {
-  width: 100%;
-  height: 20px;
-  background: #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 10px 0;
+.service-card:hover {
+    transform: translateY(-5px);
 }
 
-.progress {
-  height: 100%;
-  background: #4CAF50;
-  transition: width 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 12px;
+.service-card h3 {
+    color: rebeccapurple;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    color: #cccccc;
+    font-family: 'Space Mono', monospace;
+}
+
+.about {
+    padding: 100px 5%;
+    background: #000;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about h2 {
+    color: white;
+    margin-bottom: 30px;
+}
+
+.bio {
+    color: #cccccc;
+    font-family: 'Space Mono', monospace;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.tech-stack h3 {
+    color: rebeccapurple;
+    margin-bottom: 20px;
+}
+
+.tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pill {
+    background: rebeccapurple;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-family: 'Space Mono', monospace;
+}
+
+@media (max-width: 768px) {
+    .services, .about {
+        padding: 60px 5%;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
 }

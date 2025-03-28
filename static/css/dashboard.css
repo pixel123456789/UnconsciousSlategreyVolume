@@ -1,0 +1,545 @@
+/* Dashboard Layout */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    color: white;
+    background: #000;
+}
+
+/* Header Section */
+.dashboard-header {
+    grid-column: span 12;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-left: 4px solid rebeccapurple;
+}
+
+/* Notifications */
+.notifications {
+    grid-column: span 12;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid rebeccapurple;
+}
+
+.notification {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: #000;
+    border-left: 2px solid rebeccapurple;
+    color: white;
+}
+
+/* Main Content Sections */
+.dashboard-section {
+    grid-column: span 12;
+    background: #1a1a1a;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid rebeccapurple;
+}
+
+@media (min-width: 768px) {
+    .dashboard-section {
+        grid-column: span 6;
+    }
+}
+
+/* Cards Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.card {
+    background: #000;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-left: 4px solid rebeccapurple;
+    color: white;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    background: #1a1a1a;
+}
+
+/* Project Details */
+.project-details {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    background: #1a1a1a;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid rebeccapurple;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .project-details {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.project-section {
+    padding: 1.5rem;
+    background: #000;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* Progress Bar */
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress {
+    height: 100%;
+    background: rebeccapurple;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress span {
+    color: white;
+    font-size: 0.8rem;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    color: white;
+}
+
+.pending { background: rebeccapurple; }
+.quoted { background: #663399; }
+.accepted { background: #9370DB; }
+.rejected { background: #4B0082; }
+.planning { background: rebeccapurple; }
+.in_progress { background: #663399; }
+.review { background: #9370DB; }
+.completed { background: #4B0082; }
+
+/* Form Elements */
+input, textarea {
+    background: #000;
+    border: none;
+    border-left: 2px solid rebeccapurple;
+    color: white;
+    padding: 0.8rem;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+button {
+    background: rebeccapurple;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transform: skew(-20deg);
+}
+
+button:hover {
+    background: #663399;
+}
+
+/* Messages */
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    max-width: 80%;
+    background: #1a1a1a;
+    color: white;
+    border-left: 2px solid rebeccapurple;
+}
+
+.message.sent {
+    background: #000;
+    margin-left: auto;
+}
+
+.message.received {
+    background: #1a1a1a;
+    margin-right: auto;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #1a1a1a;
+    color: white;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background: rebeccapurple;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.dashboard-header {
+    margin-bottom: 40px;
+}
+
+.dashboard-header h2 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.dashboard-section {
+    background: #1a1a1a;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-left: 4px solid rebeccapurple;
+}
+
+.dashboard-section h3 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    color: rebeccapurple;
+}
+
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.item-card {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    color: white;
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+}
+
+.action-btn {
+    padding: 8px 16px;
+    background: rebeccapurple;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: #1a1a1a;
+    margin: 15% auto;
+    padding: 20px;
+    width: 70%;
+    max-width: 500px;
+    border-radius: 8px;
+    color: white;
+}
+
+.close {
+    float: right;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: white;
+}
+
+.modal-content textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.quote-details h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.price {
+    font-size: 24px;
+    color: #2ecc71;
+    font-family: 'Space Mono', monospace;
+    margin: 20px 0;
+}
+
+.admin-actions, .client-actions {
+    margin: 20px 0;
+}
+
+.action-button {
+    background: rebeccapurple;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    transition: background 0.3s ease;
+    margin-right: 10px;
+}
+
+.action-button:hover {
+    background: #663399;
+}
+
+.action-button.accept {
+    background: #2ecc71;
+}
+
+.action-button.accept:hover {
+    background: #27ae60;
+}
+
+.action-button.reject {
+    background: #e74c3c;
+    margin-left: 10px;
+}
+
+.action-button.reject:hover {
+    background: #c0392b;
+}
+
+.messages-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.message {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.message.sent {
+    margin-left: 20%;
+    background: #e3f2fd;
+}
+
+.message.received {
+    margin-right: 20%;
+    background: white;
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.planning { background: #e3f2fd; color: #1976d2; }
+.status-badge.in_progress { background: #fff3e0; color: #f57c00; }
+.status-badge.review { background: #e8f5e9; color: #388e3c; }
+.status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
+
+#messageForm {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#messageForm input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.action-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.action-button:hover {
+    background: #388e3c;
+}
+
+select, input[type="range"] {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background: white;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.project-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    color: #666;
+}
+
+.project-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress {
+    height: 100%;
+    background: #4CAF50;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+}
+
+.progress-update {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.milestones-list, .tasks-list, .files-list {
+    margin-top: 20px;
+}
+
+.milestone, .task {
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task.high { border-left: 4px solid #ff4444; }
+.task.medium { border-left: 4px solid #ffbb33; }
+.task.low { border-left: 4px solid #00C851; }
+
+.description {
+    color: #cccccc;
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.quote-details, .project-details {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid rebeccapurple;
+    color: white;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.planning { background: #e3f2fd; color: #1976d2; }
+.status-badge.in_progress { background: #fff3e0; color: #f57c00; }
+.status-badge.review { background: #e8f5e9; color: #388e3c; }
+.status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
+
+.messages-section {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid rebeccapurple;
+}
+
+.messages-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin: 1rem 0;
+}
