@@ -47,6 +47,10 @@
   margin: 0;
 }
 
+.nav_btn:hover {
+  background-color: #663399;
+}
+
 .nav_btn span {
   display: inline-block;
   transform: skew(20deg);
@@ -117,8 +121,9 @@
 }
 
 .nav-center {
-  flex: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .username {

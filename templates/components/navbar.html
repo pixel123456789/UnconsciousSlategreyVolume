@@ -3,11 +3,11 @@
     <div class="nav-center">
         {% if 'username' in session %}
         <span class="username">{{ session.username }}</span>
+        {% if notifications|length > 0 %}
         <div class="notification-icon" onclick="toggleNotifications()">
-            {% if notifications|length > 0 %}
             <span class="notification-count">{{ notifications|length }}</span>
-            {% endif %}
         </div>
+        {% endif %}
         <div class="notification-dropdown" id="notificationDropdown">
             {% for notification in notifications %}
             <div class="notification-item">
