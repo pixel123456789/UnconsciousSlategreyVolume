@@ -91,13 +91,24 @@ body {
   display: none;
   position: fixed;
   left: 20px;
-  top: 32px;
+  top: 20px;
   cursor: pointer;
   z-index: 1002;
   color: white;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: bold;
-  text-shadow: 0 0 4px rgba(0,0,0,0.5);
+  background: rebeccapurple;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 44px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.close-nav:hover {
+  background: #663399;
+  transform: scale(1.1);
 }
 
 @media (max-width: 768px) {
