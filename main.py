@@ -501,12 +501,13 @@ def mark_notification_read():
     return jsonify({'success': True})
 
 if __name__ == '__main__':
+    # Create instance directory if it doesn't exist
+    if not os.path.exists('instance'):
+        os.makedirs('instance')
+    
     # Initialize database
-    with app_context():
-        init_db()
     init_db()
-    # Verify database was created
-    with get_db() as db:
-        db.execute('SELECT 1')
-        print("db verified")
+    print("Database initialized at instance/database.db")
+    
+    # Run the app
     app.run(host='0.0.0.0', port=5000)
