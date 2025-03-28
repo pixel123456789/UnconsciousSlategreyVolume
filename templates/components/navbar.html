@@ -20,12 +20,14 @@
     </div>
     <nav>
         <div class="hamburger">
+            <div class="close-nav">✕</div>
             <div></div>
             <div></div>
             <div></div>
         </div>
 
         <div class="nav_links">
+            <div class="close-nav">✕</div>
             <button class="nav_btn" onclick="window.location.href='/'"><span>Home</span></button>
             {% if 'user_id' not in session %}
             <button class="nav_btn" onclick="window.location.href='/login'"><span>Login</span></button>
@@ -34,7 +36,7 @@
             <button class="nav_btn" onclick="window.location.href='/dashboard'"><span>Dashboard</span></button>
             <button class="nav_btn" onclick="window.location.href='/logout'" id="last_btn"><span>Logout</span></button>
             {% endif %}
-            <div class="close-nav">✕</div>
+            
         </div>
     </nav>
 </div>
