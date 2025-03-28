@@ -366,11 +366,13 @@ def update_quote():
             if status == 'quoted' and not price:
                 return jsonify({'success': False, 'error': 'Price is required for quotes'})
             
-            db.execute('''
-                UPDATE quotes 
-                SET status = ?, price = ?, updated_at = CURRENT_TIMESTAMP 
-                WHERE id = ?
-            ''', [status, price, quote_id])
+            try:
+                price = float(price) if price else None
+                db.execute('''
+                    UPDATE quotes 
+                    SET status = ?, price = ?, updated_at = CURRENT_TIMESTAMP 
+                    WHERE id = ?
+                ''', [status, price, quote_id])
             
             db.execute('''
                 INSERT INTO notifications (user_id, content, type) 
