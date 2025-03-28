@@ -501,13 +501,23 @@ def mark_notification_read():
     return jsonify({'success': True})
 
 if __name__ == '__main__':
-    # Create instance directory if it doesn't exist
-    if not os.path.exists('instance'):
-        os.makedirs('instance')
-    
-    # Initialize database
-    init_db()
-    print("Database initialized at instance/database.db")
+    try:
+        # Create instance directory if it doesn't exist
+        if not os.path.exists('instance'):
+            os.makedirs('instance')
+            print("Created instance directory")
+        
+        # Initialize database directly
+        db = sqlite3.connect('instance/database.db')
+        with db:
+            init_db()
+            print("Database initialized at instance/database.db")
+            # Test database connection
+            db.execute('SELECT 1').fetchone()
+            print("Database connection verified")
+        db.close()
+    except Exception as e:
+        print(f"Error during initialization: {e}")
     
     # Run the app
     app.run(host='0.0.0.0', port=5000)
