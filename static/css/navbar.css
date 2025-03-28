@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
 #nav {
   display: flex;
   align-items: center;
@@ -6,7 +8,10 @@
   background: #000000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   height: 88px;
-  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 #nav_logo {
@@ -18,62 +23,6 @@
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: -1px;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 999;
-  position: absolute;
-  right: 10px;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.hamburger.active {
-  opacity: 0;
-}
-
-.hamburger-nav {
-  display: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 999;
-  position: absolute;
-  left: 10px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.hamburger.active + .nav_links .hamburger-nav {
-  opacity: 1;
-}
-
-.hamburger div {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 3px 0;
-  transition: 0.3s;
-}
-
-.hamburger.active div:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.active div:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active div:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .nav_links {
@@ -91,38 +40,11 @@ nav {
   border: none;
   border-right: 8px solid #000000;
   cursor: pointer;
-  font-family: 'Inter', Arial, sans-serif;
-  font-weight: 900;
+  font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
   letter-spacing: -1px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   margin: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav_btn:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  background: rgba(255,255,255,0.1);
-  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav_btn:hover:after {
-  height: 100%;
-}
-
-#last_btn {
-  width: 160px;
-  margin-right: -50px;
-}
-
-#last_btn span {
-  transform: skew(20deg) translateX(-11px);
 }
 
 .nav_btn span {
@@ -130,31 +52,37 @@ nav {
   transform: skew(20deg);
 }
 
-.nav_btn:hover {
-  background-color: #663399;
+.hamburger {
+  display: none;
+  cursor: pointer;
+  padding: 15px;
+  margin-right: 15px;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px 0;
+  transition: 0.3s;
 }
 
 @media (max-width: 768px) {
   .hamburger {
     display: block;
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    z-index: 1000;
   }
 
   .nav_links {
     position: fixed;
-    top: 0;
+    top: 88px;
     left: -100%;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 88px);
     background: #1a1a1a;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: left 0.3s ease;
-    z-index: 999;
+    justify-content: flex-start;
+    padding-top: 20px;
+    transition: 0.3s ease;
   }
 
   .nav_links.active {
@@ -163,8 +91,9 @@ nav {
 
   .nav_btn {
     transform: none;
-    width: 200px;
-    height: 50px;
+    width: 90%;
+    max-width: 300px;
+    height: 60px;
     margin: 10px 0;
     border-right: none;
     border-left: 4px solid rebeccapurple;
@@ -174,80 +103,83 @@ nav {
     transform: none;
   }
 
-  #nav {
-    width: 100%;
+  .hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
   }
 
-  nav {
-    position: static;
-    width: 100%;
+  .hamburger.active div:nth-child(2) {
+    opacity: 0;
   }
 
-  .nav-center {
-    flex: 1;
-    text-align: center;
+  .hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
   }
+}
 
-  .username {
-    color: white;
-    font-family: 'Space Mono', monospace;
-    font-size: 1.2rem;
-  }
+.nav-center {
+  flex: 1;
+  text-align: center;
+}
 
-  .notification-icon {
-    position: relative;
-    margin-right: 20px;
-    cursor: pointer;
-  }
+.username {
+  color: white;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.2rem;
+}
 
-  .notification-icon:before {
-    content: '🔔';
-    font-size: 1.5rem;
-    color: white;
-  }
+.notification-icon {
+  position: relative;
+  margin-right: 20px;
+  cursor: pointer;
+}
 
-  .notification-count {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: rebeccapurple;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-    font-family: 'Space Mono', monospace;
-  }
+.notification-icon:before {
+  content: '🔔';
+  font-size: 1.5rem;
+  color: white;
+}
 
-  .notification-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #1a1a1a;
-    min-width: 300px;
-    max-height: 400px;
-    overflow-y: auto;
-    border-left: 4px solid rebeccapurple;
-    z-index: 1000;
-  }
+.notification-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: rebeccapurple;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  font-family: 'Space Mono', monospace;
+}
 
-  .notification-dropdown.show {
-    display: block;
-  }
+.notification-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #1a1a1a;
+  min-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  border-left: 4px solid rebeccapurple;
+  z-index: 1000;
+}
 
-  .notification-item {
-    padding: 15px;
-    border-bottom: 1px solid #333;
-  }
+.notification-dropdown.show {
+  display: block;
+}
 
-  .notification-item p {
-    color: white;
-    margin: 0 0 5px 0;
-    font-family: 'Space Mono', monospace;
-  }
+.notification-item {
+  padding: 15px;
+  border-bottom: 1px solid #333;
+}
 
-  .notification-item small {
-    color: #999;
-    font-size: 0.8rem;
-  }
+.notification-item p {
+  color: white;
+  margin: 0 0 5px 0;
+  font-family: 'Space Mono', monospace;
+}
+
+.notification-item small {
+  color: #999;
+  font-size: 0.8rem;
 }
