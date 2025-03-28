@@ -502,8 +502,11 @@ def mark_notification_read():
 
 if __name__ == '__main__':
     # Initialize database
+    with app_context():
+        init_db()
     init_db()
     # Verify database was created
     with get_db() as db:
         db.execute('SELECT 1')
+        print("db verified")
     app.run(host='0.0.0.0', port=5000)
