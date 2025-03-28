@@ -1,17 +1,111 @@
-
+import sqlite3
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-from database import get_db, QUOTE_STATUSES, PROJECT_STATUSES
 from functools import wraps
 from datetime import datetime, date
 import os
+from contextlib import contextmanager
 import re
+
+QUOTE_STATUSES = ['pending', 'quoted', 'accepted', 'rejected']
+PROJECT_STATUSES = ['planning', 'in_progress', 'review', 'completed']
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
 app.config['PERMANENT_SESSION_LIFETIME'] = 1800  # 30 minutes
 app.config['SESSION_COOKIE_SECURE'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
+
+@contextmanager
+def get_db():
+    if not os.path.exists('instance'):
+        os.makedirs('instance')
+    db = sqlite3.connect(
+        'instance/database.db',
+        detect_types=sqlite3.PARSE_DECLTYPES
+    )
+    db.row_factory = sqlite3.Row
+    try:
+        yield db
+    finally:
+        db.close()
+
+def init_db():
+    if not os.path.exists('instance'):
+        os.makedirs('instance')
+
+    with get_db() as conn:
+        c = conn.cursor()
+
+        c.execute('''CREATE TABLE IF NOT EXISTS users 
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    is_admin BOOLEAN DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS quotes
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    description TEXT NOT NULL,
+                    status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'quoted', 'accepted', 'rejected')),
+                    price REAL,
+                    feedback TEXT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users (id))''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS projects
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    quote_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL,
+                    status TEXT DEFAULT 'planning' CHECK (status IN ('planning', 'in_progress', 'review', 'completed')),
+                    start_date DATE,
+                    end_date DATE,
+                    progress INTEGER DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (quote_id) REFERENCES quotes (id),
+                    FOREIGN KEY (user_id) REFERENCES users (id))''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS messages
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    sender_id INTEGER NOT NULL,
+                    receiver_id INTEGER NOT NULL,
+                    quote_id INTEGER,
+                    project_id INTEGER,
+                    content TEXT NOT NULL,
+                    is_read BOOLEAN DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (sender_id) REFERENCES users (id),
+                    FOREIGN KEY (receiver_id) REFERENCES users (id),
+                    FOREIGN KEY (quote_id) REFERENCES quotes (id),
+                    FOREIGN KEY (project_id) REFERENCES projects (id))''')
+
+        c.execute('''CREATE TABLE IF NOT EXISTS notifications
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    content TEXT NOT NULL,
+                    type TEXT CHECK (type IN ('info', 'warning', 'success', 'error')),
+                    is_read BOOLEAN DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users (id))''')
+
+        # Create indexes for better performance
+        c.execute('CREATE INDEX IF NOT EXISTS idx_quotes_user_id ON quotes(user_id)')
+        c.execute('CREATE INDEX IF NOT EXISTS idx_projects_user_id ON projects(user_id)')
+        c.execute('CREATE INDEX IF NOT EXISTS idx_messages_receiver_id ON messages(receiver_id)')
+        c.execute('CREATE INDEX IF NOT EXISTS idx_notifications_user_id ON notifications(user_id)')
+
+        # Create admin user if it doesn't exist
+        admin = c.execute('SELECT * FROM users WHERE username = ?', ['admin']).fetchone()
+        if not admin:
+            c.execute('INSERT INTO users (username, password, email, is_admin) VALUES (?, ?, ?, ?)',
+                     ['admin', generate_password_hash('ini.dev.liam'), 'liamaaronkinnaird1@outlook.com', True])
+
+        conn.commit()
 
 def login_required(f):
     @wraps(f)
@@ -407,7 +501,6 @@ def mark_notification_read():
     return jsonify({'success': True})
 
 if __name__ == '__main__':
-    from database import init_db, get_db
     # Initialize database
     init_db()
     # Verify database was created
