@@ -21,6 +21,7 @@
                 <div class="admin-actions">
                     <form id="priceForm" onsubmit="submitPrice(event)">
                         <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                        <input type="hidden" name="status" value="quoted">
                         <input type="number" name="price" step="0.01" min="0" placeholder="Enter quote price" required>
                         <button type="submit" class="action-button">Send Quote</button>
                     </form>
