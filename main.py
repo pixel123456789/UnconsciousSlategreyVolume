@@ -143,13 +143,20 @@ def dashboard():
             ORDER BY created_at DESC
         ''', [session['user_id']]).fetchall()
 
-        template = 'dashboard/admin.html' if session.get('is_admin') else 'dashboard/user.html'
-        return render_template(template,
-                             quotes=quotes,
-                             projects=projects,
-                             notifications=notifications,
-                             quote_statuses=QUOTE_STATUSES,
-                             project_statuses=PROJECT_STATUSES)
+        if session.get('is_admin'):
+            return render_template('dashboard/admin.html',
+                                quotes=quotes,
+                                projects=projects,
+                                notifications=notifications,
+                                quote_statuses=QUOTE_STATUSES,
+                                project_statuses=PROJECT_STATUSES)
+        else:
+            return render_template('dashboard/user.html',
+                                quotes=quotes,
+                                projects=projects,
+                                notifications=notifications,
+                                quote_statuses=QUOTE_STATUSES,
+                                project_statuses=PROJECT_STATUSES)
 
 @app.route('/quote/<int:quote_id>')
 @login_required
