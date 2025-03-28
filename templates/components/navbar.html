@@ -27,7 +27,7 @@
         <div class="close-nav">✕</div>
 
         <div class="nav_links">
-            <div class="close-nav">✕</div>
+            <button class="nav_btn close-menu"><span>Close</span></button>
             <button class="nav_btn" onclick="window.location.href='/'"><span>Home</span></button>
             {% if 'user_id' not in session %}
             <button class="nav_btn" onclick="window.location.href='/login'"><span>Login</span></button>

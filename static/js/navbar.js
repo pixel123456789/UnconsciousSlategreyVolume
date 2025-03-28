@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Close menu when clicking outside
-    closeNav?.addEventListener('click', () => {
+    document.querySelector('.close-menu')?.addEventListener('click', () => {
         hamburger?.classList.remove('active');
         navLinks?.classList.remove('active');
     });
