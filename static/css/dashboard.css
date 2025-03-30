@@ -192,7 +192,7 @@
 .status-badge.planning { background: var(--color-primary); }
 .status-badge.in_progress { background: var(--color-primary-dark); }
 .status-badge.review { background: var(--color-primary); }
-.status-badge.completed { background: var(--color-mid-gray); }
+.status-badge.completed { background: var(--color-primary-dark); }
 
 /* Description */
 .description {
@@ -381,8 +381,8 @@ button:hover {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    background: #222;
-    border: 1px solid #333;
+    background: var(--color-black);
+    border: 1px solid var(--color-mid-gray);
     border-radius: 4px;
     color: var(--color-white);
 }
@@ -400,7 +400,7 @@ button:hover {
 
 .price {
     font-size: 24px;
-    color: #2ecc71;
+    color: var(--color-primary); /* Changed from green */
     font-family: 'Space Mono', monospace;
     margin: 20px 0;
 }
@@ -426,20 +426,20 @@ button:hover {
 }
 
 .action-button.accept {
-    background: #2ecc71;
+    background: var(--color-primary); /* Removed green */
 }
 
 .action-button.accept:hover {
-    background: #27ae60;
+    background: var(--color-primary-dark); /* Removed green */
 }
 
 .action-button.reject {
-    background: #e74c3c;
+    background: var(--color-primary-dark); /* Removed red, using primary dark instead */
     margin-left: 10px;
 }
 
 .action-button.reject:hover {
-    background: #c0392b;
+    background: var(--color-primary); /* Removed red, using primary instead */
 }
 
 .messages-container {
@@ -460,7 +460,7 @@ button:hover {
 .status-badge.planning { background: var(--color-dark-gray); color: var(--color-white); }
 .status-badge.in_progress { background: var(--color-primary); color: var(--color-white); }
 .status-badge.review { background: var(--color-primary-dark); color: var(--color-white); }
-.status-badge.completed { background: var(--color-mid-gray); color: var(--color-white); }
+.status-badge.completed { background: var(--color-primary-dark); color: var(--color-white); }
 
 #messageForm {
     display: flex;
@@ -479,14 +479,14 @@ button:hover {
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 8px;
-    background: #4CAF50;
+    background: var(--color-primary); /* Removed green */
     color: var(--color-white);
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .action-button:hover {
-    background: #388e3c;
+    background: var(--color-primary-dark); /* Removed green */
 }
 
 select, input[type="range"] {
