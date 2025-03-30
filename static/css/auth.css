@@ -1,80 +1,77 @@
-
 .auth-container {
-    max-width: 400px;
-    margin: 120px auto;
-    padding: 40px;
-    background: #1a1a1a;
-    border-left: 4px solid rebeccapurple;
-    color: white;
+  max-width: 400px;
+  margin: 120px auto;
+  padding: 40px;
+  background: var(--color-dark-gray);
+  border-left: 4px solid var(--color-primary);
+  color: var(--color-white);
 }
 
 .auth-container h2 {
-    margin-bottom: 30px;
-    font-family: 'Arial Black', Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: -1px;
+  margin-bottom: 30px;
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 12px;
-    background: #000;
-    border: none;
-    border-left: 2px solid rebeccapurple;
-    color: white;
-    font-family: 'Space Mono', monospace;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  background: var(--color-black);
+  border: none;
+  border-left: 2px solid var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-mono);
 }
 
 .form-group input:focus {
-    outline: none;
-    border-left: 4px solid rebeccapurple;
-    transform: translateX(5px);
+  outline: none;
+  border-left: 4px solid var(--color-primary);
+  transform: translateX(5px);
 }
 
 .auth-container button {
-    width: 100%;
-    padding: 12px;
-    background: rebeccapurple;
-    border: none;
-    color: white;
-    font-family: 'Arial Black', Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    cursor: pointer;
-    transform: skew(-20deg);
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  background: var(--color-primary);
+  border: none;
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  cursor: pointer;
+  transform: skew(-20deg);
 }
 
 .auth-container button:hover {
-    background: #663399;
-    transform: skew(-20deg) scale(1.02);
+  background: var(--color-primary-dark);
+  transform: skew(-20deg) scale(1.02);
 }
 
 .auth-container p {
-    margin-top: 20px;
-    text-align: center;
-    font-family: 'Space Mono', monospace;
+  margin-top: 20px;
+  text-align: center;
+  font-family: var(--font-mono);
+  color: var(--color-white);
 }
 
 .auth-container a {
-    color: rebeccapurple;
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 .auth-container a:hover {
-    color: #663399;
+  color: var(--color-primary-dark);
 }
 
 .alert {
     background: rgba(102, 51, 153, 0.2);
-    border-left: 4px solid rebeccapurple;
+    border-left: 4px solid var(--color-primary);
     padding: 10px;
     margin-bottom: 20px;
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-mono);
 }
