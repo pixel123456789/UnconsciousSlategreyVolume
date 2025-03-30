@@ -194,72 +194,23 @@ body {
   background: var(--color-primary-dark);
 }
 
-/* Responsive Design */
+/* Mobile Navigation */
 @media (max-width: 768px) {
-  .dashboard-container {
-    padding: 1rem;
+  .hamburger {
+    display: block;
   }
 
-  .project-details, .quote-details {
-    padding: 1rem;
-  }
-
-  .services-grid, .dashboard-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .progress-update, .milestone-item, .task-item {
+  .nav_links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background: var(--color-black);
     flex-direction: column;
-    gap: 0.5rem;
+    
+    transition: 0.3s;
   }
-
-  .file-actions {
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .upload-form {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .file-input {
-    width: 100%;
-  }
-
-  .messages-container {
-    max-height: 300px;
-  }
-
-  .message-form textarea {
-    width: 100%;
-    min-height: 80px;
-  }
-
-  .nav_links.active {
-    left: 0;
-    opacity: 1;
-  }
-
-  .nav_btn {
-    width: 100%;
-    margin: 0.5rem 0;
-    text-align: center;
-  }
-}
-
-/* Touch Device Optimizations */
-@media (hover: none) {
-  .action-button:active {
-    transform: scale(0.95) skew(-20deg);
-  }
-  
-  .card:active {
-    transform: scale(0.98);
-  }
-}
 
   .nav_links.active {
     left: 0;
