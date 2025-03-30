@@ -30,10 +30,10 @@
             <button class="nav_btn" onclick="window.location.href='/'"><span>Home</span></button>
             {% if 'user_id' not in session %}
             <button class="nav_btn" onclick="window.location.href='/login'"><span>Login</span></button>
-            <button class="nav_btn" onclick="window.location.href='/register'" id="last_btn"><span>Register</span></button>
+            <button class="nav_btn" onclick="window.location.href='/register'" id="last_btn"><span class="spanlast">Register</span></button>
             {% else %}
             <button class="nav_btn" onclick="window.location.href='/dashboard'"><span>Dashboard</span></button>
-            <button class="nav_btn" onclick="window.location.href='/logout'" id="last_btn"><span>Logout</span></button>
+            <button class="nav_btn" onclick="window.location.href='/logout'" id="last_btn"><span class="spanlast">Logout</span></button>
             {% endif %}
             
         </div>
