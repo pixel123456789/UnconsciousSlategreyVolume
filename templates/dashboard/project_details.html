@@ -203,3 +203,100 @@
     </script>
 </body>
 </html>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="project-details">
+        <h2>Project #{{ project.id }} - {{ project.title }}</h2>
+        <p class="description">{{ project.description }}</p>
+        
+        <div class="project-status">
+            <h4>Status: {{ project.status }}</h4>
+            <div class="project-progress">
+                <div class="progress-bar" style="width: {{ project.progress }}%"></div>
+            </div>
+            <p>Progress: {{ project.progress }}%</p>
+        </div>
+
+        {% if session.is_admin %}
+        <div class="admin-controls">
+            <form id="updateProjectForm">
+                <select name="status">
+                    {% for status in statuses %}
+                    <option value="{{ status }}" {% if status == project.status %}selected{% endif %}>
+                        {{ status|replace('_', ' ')|title }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="progress" min="0" max="100" value="{{ project.progress }}" />
+                <button type="submit" class="action-button">Update Project</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div class="messages-section">
+            <h3>Messages</h3>
+            <div class="message-container">
+                {% for message in messages %}
+                <div class="message">
+                    <strong>{{ message.sender_name }}</strong>
+                    <p>{{ message.content }}</p>
+                    <small>{{ message.created_at }}</small>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="message-input">
+                <textarea id="messageContent" placeholder="Type your message..."></textarea>
+                <button onclick="sendMessage()" class="action-button">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    const content = document.getElementById('messageContent').value;
+    if (!content.trim()) return;
+
+    fetch('/send_message', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+            'content': content,
+            'project_id': '{{ project.id }}',
+            'receiver_id': '{{ "1" if not session.is_admin else project.user_id }}'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+
+{% if session.is_admin %}
+document.getElementById('updateProjectForm').onsubmit = function(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    fetch('/update_project', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+            'project_id': '{{ project.id }}',
+            'status': formData.get('status'),
+            'progress': formData.get('progress')
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+};
+{% endif %}
+</script>
+{% endblock %}

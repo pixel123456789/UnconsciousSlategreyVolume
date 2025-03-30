@@ -125,3 +125,118 @@
     </script>
 </body>
 </html>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="quote-details">
+        <h2>{{ quote.title }}</h2>
+        <p class="description">{{ quote.description }}</p>
+        
+        <div class="status-section">
+            <span class="status-badge status-{{ quote.status }}">
+                {{ quote.status|title }}
+            </span>
+            {% if quote.price %}
+            <h4>Price: ${{ quote.price }}</h4>
+            {% endif %}
+        </div>
+
+        {% if session.is_admin and quote.status == 'pending' %}
+        <div class="admin-controls">
+            <form id="quoteForm">
+                <input type="number" name="price" step="0.01" placeholder="Enter price" required />
+                <button type="submit" class="action-button">Submit Quote</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if not session.is_admin and quote.status == 'quoted' %}
+        <div class="client-controls">
+            <button onclick="updateQuote('accepted')" class="action-button">Accept Quote</button>
+            <button onclick="updateQuote('rejected')" class="action-button">Reject Quote</button>
+        </div>
+        {% endif %}
+
+        <div class="messages-section">
+            <h3>Messages</h3>
+            <div class="message-container">
+                {% for message in messages %}
+                <div class="message">
+                    <strong>{{ message.sender_name }}</strong>
+                    <p>{{ message.content }}</p>
+                    <small>{{ message.created_at }}</small>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="message-input">
+                <textarea id="messageContent" placeholder="Type your message..."></textarea>
+                <button onclick="sendMessage()" class="action-button">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    const content = document.getElementById('messageContent').value;
+    if (!content.trim()) return;
+
+    fetch('/send_message', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+            'content': content,
+            'quote_id': '{{ quote.id }}',
+            'receiver_id': '{{ "1" if not session.is_admin else quote.user_id }}'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+
+{% if session.is_admin %}
+document.getElementById('quoteForm').onsubmit = function(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    fetch('/update_quote', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+            'quote_id': '{{ quote.id }}',
+            'status': 'quoted',
+            'price': formData.get('price')
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+};
+{% endif %}
+
+function updateQuote(status) {
+    fetch('/update_quote', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+            'quote_id': '{{ quote.id }}',
+            'status': status
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = '/dashboard';
+        }
+    });
+}
+</script>
+{% endblock %}
