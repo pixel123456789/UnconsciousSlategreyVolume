@@ -19,7 +19,7 @@
   margin: 0;
   padding-left: 24px;
   font-weight: 900;
-  font-family: 'Arial Black', Arial, sans-serif;
+  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
   font-size: 1.8rem;
   color: #ffffff;
   text-transform: uppercase;
@@ -41,7 +41,8 @@
   border: none;
   border-right: 8px solid #000000;
   cursor: pointer;
-  font-family: 'Arial Black', Arial, sans-serif;
+  font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -1px;
   transition: all 0.5s ease;
@@ -225,7 +226,7 @@
     scrollbar-width: none;
     padding-right:-100px
   }
-  
+
   .nav_links::-webkit-scrollbar {
     display: none;
   }
