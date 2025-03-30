@@ -281,9 +281,28 @@ body {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
   margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+  
+  .dashboard-container {
+    margin: 88px 10px 2rem;
+  }
+  
+  .hero-section {
+    padding: 0 20px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
 }
 
 /* Cards */
@@ -319,11 +338,19 @@ input, select, textarea {
   width: 100%;
   padding: 12px;
   background: var(--color-black);
-  border: none;
+  border: 1px solid var(--color-dark-gray);
   border-left: 2px solid var(--color-primary);
   color: var(--color-white);
   font-family: var(--font-mono);
   margin-bottom: 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: rebeccapurple;
+  box-shadow: 0 0 0 2px rgba(102,51,153,0.2);
 }
 
 input:focus, select:focus, textarea:focus {

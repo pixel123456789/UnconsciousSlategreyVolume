@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', (e) => {
-        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target) && !closeNav?.contains(e.target)) {
+        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
             hamburger?.classList.remove('active');
             navLinks?.classList.remove('active');
         }
