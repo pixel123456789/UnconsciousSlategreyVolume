@@ -4,7 +4,7 @@
     margin: 2rem auto;
     padding: 1rem;
     color: white;
-    background: #000;
+    background: #1a1a1a;
 }
 
 /* Header Section */
@@ -156,19 +156,6 @@ input, textarea {
     margin: 0.5rem 0;
 }
 
-button {
-    background: rebeccapurple;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    cursor: pointer;
-    transform: skew(-20deg);
-}
-
-button:hover {
-    background: #663399;
-}
-
 /* Messages */
 .message {
     padding: 10px;
@@ -193,14 +180,7 @@ button:hover {
 .form-group {
     margin-bottom: 1rem;
 }
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: #1a1a1a;
-    color: white;
-}
+
 
 .logout-btn {
     padding: 8px 16px;
@@ -408,15 +388,14 @@ button:hover {
     border-radius: 8px;
 }
 
-.action-button {
-    padding: 0.75rem 1.5rem;
+.nav_btn {
+    transform: skew(-20deg);
+    width: 120px;
+    height: 88px;
+    margin: 0;
     border: none;
-    border-radius: 8px;
-    background: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
+    border-right: 8px solid #000000;
+  }
 
 .action-button:hover {
     background: #388e3c;
@@ -438,7 +417,9 @@ select, input[type="range"] {
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+    margin-top:50px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #666;
 }
 
 .project-meta {
