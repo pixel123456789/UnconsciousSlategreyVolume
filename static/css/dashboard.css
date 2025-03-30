@@ -511,15 +511,39 @@ select, input[type="range"] {
     margin-top: 20px;
 }
 
-.milestone, .task {
-    background: var(--color-black); /* Updated background */
+.milestone-item, .task-item, .file-item {
+    background: var(--color-black);
     padding: 1rem;
     margin: 0.5rem 0;
     border-radius: 4px;
-    color: var(--color-white); /* Updated color */
+    color: var(--color-white);
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.file-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.file-name {
+    font-size: 0.9em;
+}
+
+.upload-form {
+    margin: 1rem 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.file-input {
+    padding: 5px;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-light-gray);
+    border-radius: 4px;
 }
 
 

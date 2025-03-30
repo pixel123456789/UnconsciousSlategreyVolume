@@ -367,9 +367,12 @@ def download_file(file_id):
 @app.route('/delete_file/<int:file_id>', methods=['POST'])
 @login_required
 def delete_file(file_id):
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+        
     with get_db() as db:
         file = db.execute('SELECT * FROM project_files WHERE id = ?', [file_id]).fetchone()
-        if file:
+        if file and os.path.exists(file['file_path']):
             os.remove(file['file_path'])
             db.execute('DELETE FROM project_files WHERE id = ?', [file_id])
             db.commit()
