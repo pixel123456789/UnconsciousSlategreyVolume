@@ -6,35 +6,34 @@
     <link rel="stylesheet" href="/static/css/navbar.css">
     <link rel="stylesheet" href="/static/css/dashboard.css">
 </head>
-<body style = "background-color:white">
-    {% include 'components/navbar.html' %}
-    <div class="dashboard-container">
-        <div class="quote-details">
-            <h2>{{ quote.title }}</h2>
-            <p class="description">{{ quote.description }}</p>
-            <div class="status-badge {{ quote.status }}">{{ quote.status }}</div>
-            {% if quote.price %}
-                <p class="price">${{ quote.price }}</p>
-            {% endif %}
+{% include 'components/navbar.html' %}
+<div class="dashboard-container">
+    <div class="quote-details">
+        <h2>{{ quote.title }}</h2>
+        <p class="description">{{ quote.description }}</p>
+        <div class="status-badge status-{{ quote.status }}">{{ quote.status }}</div>
+        {% if quote.price %}
+            <p class="price">${{ quote.price }}</p>
+        {% endif %}
 
-            {% if session.username == 'admin' and quote.status == 'pending' %}
-                <div class="admin-actions">
-                    <form id="priceForm" onsubmit="submitPrice(event)">
-                        <input type="hidden" name="quote_id" value="{{ quote.id }}">
-                        <input type="hidden" name="status" value="quoted">
-                        <input type="number" name="price" step="0.01" min="0" placeholder="Enter quote price" required>
-                        <button type="submit" class="action-button">Send Quote</button>
-                    </form>
-                </div>
-            {% endif %}
+        {% if session.username == 'admin' and quote.status == 'pending' %}
+            <div class="admin-actions">
+                <form id="priceForm" onsubmit="submitPrice(event)">
+                    <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                    <input type="hidden" name="status" value="quoted">
+                    <input type="number" name="price" step="0.01" min="0" placeholder="Enter quote price" required>
+                    <button type="submit" class="action-button"><span>Send Quote</span></button>
+                </form>
+            </div>
+        {% endif %}
 
-            {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
-                <div class="client-actions">
-                    <button onclick="respondToQuote('accepted')" class="action-button accept">Accept Quote</button>
-                    <button onclick="respondToQuote('rejected')" class="action-button reject">Reject Quote</button>
-                </div>
-            {% endif %}
-        </div>
+        {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
+            <div class="client-actions">
+                <button onclick="respondToQuote('accepted')" class="action-button accept"><span>Accept Quote</span></button>
+                <button onclick="respondToQuote('rejected')" class="action-button reject"><span>Reject Quote</span></button>
+            </div>
+        {% endif %}
+    </div>
 
         <div class="messages-section">
             <h3>Messages</h3>
