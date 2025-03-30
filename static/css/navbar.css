@@ -130,6 +130,7 @@
     left: auto;
     height: 40px;
     align-self: center;
+    margin-top: 24px;
   }
 
   .nav_links.active .close-nav {
