@@ -61,6 +61,8 @@ def init_db():
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                     quote_id INTEGER NOT NULL,
                     user_id INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    description TEXT NOT NULL,
                     status TEXT DEFAULT 'planning' CHECK (status IN ('planning', 'in_progress', 'review', 'completed')),
                     start_date DATE,
                     end_date DATE,
