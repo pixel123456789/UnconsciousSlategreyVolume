@@ -234,6 +234,7 @@
     overflow-x: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    padding-right:-100px
   }
   
   .nav_links::-webkit-scrollbar {
