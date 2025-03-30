@@ -121,12 +121,14 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
     padding-right: 15px;
+    opacity: 0;
   }
 
   .nav_links.active {
     left: 0;
+    opacity: 1;
   }
 
   .close-nav {
