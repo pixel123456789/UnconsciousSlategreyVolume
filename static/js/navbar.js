@@ -1,39 +1,35 @@
 
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav_links');
-    
-    hamburger?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        navLinks.style.transform = navLinks.classList.contains('active') ? 'translateX(0)' : 'translateX(100%)';
-    });
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav_links');
 
-    window.closeNavMobile = () => {
-        hamburger?.classList.remove('active');
-        navLinks?.classList.remove('active');
-    };
+function closeNavMobile() {
+  hamburger?.classList.remove('active');
+  navLinks?.classList.remove('active');
+}
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
-            closeNavMobile();
-        }
-    });
+function toggleNotifications() {
+  const dropdown = document.getElementById('notificationDropdown');
+  dropdown?.classList.toggle('show');
+}
 
-    document.addEventListener('click', (e) => {
-        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
-            hamburger?.classList.remove('active');
-            navLinks?.classList.remove('active');
-        }
-    });
+// Toggle mobile menu
+hamburger?.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navLinks?.classList.toggle('active');
+});
 
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav_btn').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger?.classList.remove('active');
-            navLinks?.classList.remove('active');
-        });
-    });
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
+    closeNavMobile();
+  }
+});
+
+// Close notifications when clicking outside
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('notificationDropdown');
+  const notificationIcon = document.querySelector('.notification-icon');
+  if (!notificationIcon?.contains(e.target) && !dropdown?.contains(e.target)) {
+    dropdown?.classList.remove('show');
+  }
 });
