@@ -1,9 +1,10 @@
 
+// Wait for DOM to be loaded
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav_links');
 
-  function toggleMobileNav() {
+  window.toggleMobileNav = function() {
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
   }
@@ -15,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.toggleNotifications = function() {
     const dropdown = document.getElementById('notificationDropdown');
-    dropdown.classList.toggle('show');
+    if (dropdown) {
+      dropdown.classList.toggle('show');
+    }
   }
 
   // Close notifications dropdown when clicking outside
