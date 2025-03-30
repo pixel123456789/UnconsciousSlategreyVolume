@@ -72,7 +72,7 @@
 }
 
 .close-nav {
-  display: none;
+  display: inline-block;
   position: fixed;
   left: 20px;
   top: 32px;
