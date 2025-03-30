@@ -5,44 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-    <style>
-        .details-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            grid-gap: 20px;
-        }
-        .details-panel {
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #f9f9f9; /* Example background color */
-        }
-        .project-section {
-            margin-bottom: 20px;
-        }
-        .project-header h2 {
-            color: #333; /* Example text color */
-        }
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin-left: 10px;
-        }
-        .status-badge.in_progress {
-            background-color: #ffcc00; /* Example color */
-            color: #333;
-        }
-        .status-badge.completed {
-            background-color: #4CAF50; /* Example color */
-            color: white;
-        }
-        .status-badge.pending {
-            background-color: #FFA500; /* Example color */
-            color: white;
-        }
-
-        /* Add more styling as needed */
-
-    </style>
+    
 </head>
 <body>
     {% include 'components/navbar.html' %}

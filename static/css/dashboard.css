@@ -457,10 +457,10 @@ button:hover {
   text-transform: capitalize;
 }
 
-.status-badge.planning { background: var(--color-dark-gray); color: var(--color-white); }
+.status-badge.planning { background: var(--color-primary); color: var(--color-white); }
 .status-badge.in_progress { background: var(--color-primary); color: var(--color-white); }
-.status-badge.review { background: var(--color-primary-dark); color: var(--color-white); }
-.status-badge.completed { background: var(--color-primary-dark); color: var(--color-white); }
+.status-badge.review { background: var(--color-primary); color: var(--color-white); }
+.status-badge.completed { background: var(--color-primary); color: var(--color-white); }
 
 #messageForm {
     display: flex;
