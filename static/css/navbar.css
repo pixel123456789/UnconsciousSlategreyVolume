@@ -39,14 +39,14 @@
 }
 
 .nav_btn {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: rebeccapurple;
+  color: white;
   transform: skew(-20deg);
   padding: 0;
   width: 120px;
   height: 88px;
   border: none;
-  border-right: 8px solid var(--color-black);
+  border-right: 8px solid #000000;
   cursor: pointer;
   font-family: 'Arial Black', Arial, sans-serif;
   text-transform: uppercase;
