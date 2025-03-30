@@ -1,117 +1,126 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quote Details</title>
-    <link rel="stylesheet" href="/static/css/navbar.css">
-    <link rel="stylesheet" href="/static/css/dashboard.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Quote Details - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
     {% include 'components/navbar.html' %}
-<div class="dashboard-container">
-    <div class="quote-details">
-        <h2>{{ quote.title }}</h2>
-        <p class="description">{{ quote.description }}</p>
-        <div class="status-badge status-{{ quote.status }}">{{ quote.status }}</div>
-        {% if quote.price %}
-            <p class="price">${{ quote.price }}</p>
-        {% endif %}
 
-        {% if session.username == 'admin' and quote.status == 'pending' %}
-            <div class="admin-actions">
-                <form id="priceForm" onsubmit="submitPrice(event)">
-                    <input type="hidden" name="quote_id" value="{{ quote.id }}">
-                    <input type="hidden" name="status" value="quoted">
-                    <input type="number" name="price" step="0.01" min="0" placeholder="Enter quote price" required>
-                    <button type="submit" class="action-button"><span>Send Quote</span></button>
-                </form>
+    <div class="dashboard-container">
+        <div class="quote-details">
+            <div class="header-section">
+                <h2><span>{{ quote.title }}</span></h2>
+                <div class="status-badge status-{{ quote.status }}"><span>{{ quote.status }}</span></div>
             </div>
-        {% endif %}
 
-        {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
-            <div class="client-actions">
-                <button onclick="respondToQuote('accepted')" class="action-button accept"><span>Accept Quote</span></button>
-                <button onclick="respondToQuote('rejected')" class="action-button reject"><span>Reject Quote</span></button>
+            <div class="content-section">
+                <div class="description">
+                    <p><span>{{ quote.description }}</span></p>
+                </div>
+
+                {% if quote.price %}
+                <div class="price-section">
+                    <h3><span>Quoted Price</span></h3>
+                    <p class="price"><span>${{ quote.price }}</span></p>
+                </div>
+                {% endif %}
+
+                {% if session.is_admin and quote.status == 'pending' %}
+                <div class="admin-actions">
+                    <form id="priceForm" onsubmit="submitPrice(event)">
+                        <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                        <input type="hidden" name="status" value="quoted">
+                        <input type="number" name="price" step="0.01" min="0" placeholder="Enter quote price" required>
+                        <button type="submit" class="action-button primary"><span>Send Quote</span></button>
+                    </form>
+                </div>
+                {% endif %}
+
+                {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
+                <div class="client-actions">
+                    <button onclick="respondToQuote('accepted')" class="action-button success"><span>Accept Quote</span></button>
+                    <button onclick="respondToQuote('rejected')" class="action-button danger"><span>Reject Quote</span></button>
+                </div>
+                {% endif %}
             </div>
-        {% endif %}
-    </div>
+        </div>
 
         <div class="messages-section">
-            <h3>Messages</h3>
+            <h3><span>Messages</span></h3>
             <div class="messages-container">
                 {% for message in messages %}
-                    <div class="message">
-                        <p>{{ message.content }}</p>
-                        <small>{{ message.created_at }}</small>
-                    </div>
+                <div class="message">
+                    <p><span>{{ message.content }}</span></p>
+                    <small><span>{{ message.sender_name }} - {{ message.created_at }}</span></small>
+                </div>
                 {% endfor %}
             </div>
-            <form id="messageForm" onsubmit="sendMessage(event)">
-                <input type="text" name="content" placeholder="Type your message..." required>
-                <button type="submit" class="action-button">Send</button>
-            </form>
+
+            <div class="message-form">
+                <form id="messageForm" onsubmit="sendMessage(event)">
+                    <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                    <input type="hidden" name="receiver_id" value="{% if session.is_admin %}{{ quote.user_id }}{% else %}1{% endif %}">
+                    <textarea name="content" placeholder="Type your message..." required></textarea>
+                    <button type="submit" class="action-button"><span>Send Message</span></button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        async function submitPrice(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
+        function submitPrice(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
 
-            try {
-                const response = await fetch('/update_quote', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
+            fetch('/update_quote', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
                 if (data.success) {
                     location.reload();
                 }
-            } catch (error) {
-                console.error('Error:', error);
-            }
+            });
         }
 
-        async function respondToQuote(status) {
+        function respondToQuote(status) {
             const formData = new FormData();
             formData.append('quote_id', '{{ quote.id }}');
             formData.append('status', status);
 
-            try {
-                const response = await fetch('/update_quote', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
+            fetch('/update_quote', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
                 if (data.success) {
                     location.reload();
                 }
-            } catch (error) {
-                console.error('Error:', error);
-            }
+            });
         }
 
-        async function sendMessage(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            formData.append('quote_id', '{{ quote.id }}');
-            formData.append('receiver_id', '{{ 1 if session.username != "admin" else quote.user_id }}');
+        function sendMessage(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
 
-            try {
-                const response = await fetch('/send_message', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
+            fetch('/send_message', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
                 if (data.success) {
                     location.reload();
                 }
-            } catch (error) {
-                console.error('Error:', error);
-            }
+            });
         }
     </script>
 </body>
