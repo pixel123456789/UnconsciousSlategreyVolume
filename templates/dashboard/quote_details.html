@@ -1,110 +1,118 @@
-{% extends "base.html" %}
-{% block content %}
-{% include 'components/navbar.html' %}
 
-<div class="details-container">
-    <div class="details-header">
-        <h2>Quote Details #{{ quote.id }}</h2>
-        <div class="status-badge {{ quote.status }}">
-            <span>{{ quote.status|title }}</span>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quote Details</title>
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body style = "background-color:white">
+    {% include 'components/navbar.html' %}
+    <div class="dashboard-container">
+        <div class="quote-details">
+            <h2>{{ quote.title }}</h2>
+            <p class="description">{{ quote.description }}</p>
+            <div class="status-badge {{ quote.status }}">{{ quote.status }}</div>
+            {% if quote.price %}
+                <p class="price">${{ quote.price }}</p>
+            {% endif %}
+
+            {% if session.username == 'admin' and quote.status == 'pending' %}
+                <div class="admin-actions">
+                    <form id="priceForm" onsubmit="submitPrice(event)">
+                        <input type="hidden" name="quote_id" value="{{ quote.id }}">
+                        <input type="hidden" name="status" value="quoted">
+                        <input type="number" name="price" step="0.01" min="0" placeholder="Enter quote price" required>
+                        <button type="submit" class="action-button">Send Quote</button>
+                    </form>
+                </div>
+            {% endif %}
+
+            {% if session.user_id == quote.user_id and quote.status == 'quoted' %}
+                <div class="client-actions">
+                    <button onclick="respondToQuote('accepted')" class="action-button accept">Accept Quote</button>
+                    <button onclick="respondToQuote('rejected')" class="action-button reject">Reject Quote</button>
+                </div>
+            {% endif %}
         </div>
-    </div>
 
-    <div class="details-section">
-        <h3><span>Title</span></h3>
-        <p>{{ quote.title }}</p>
-
-        <h3><span>Description</span></h3>
-        <p>{{ quote.description }}</p>
-
-        {% if quote.price %}
-        <h3><span>Price</span></h3>
-        <p>${{ quote.price }}</p>
-        {% endif %}
-
-        {% if session.is_admin %}
-        <div class="action-panel">
-            <button class="action-button" onclick="updateQuoteStatus('quoted')">
-                <span>Quote</span>
-            </button>
-            <button class="action-button" onclick="updateQuoteStatus('rejected')">
-                <span>Reject</span>
-            </button>
-        </div>
-        {% elif quote.status == 'quoted' %}
-        <div class="action-panel">
-            <button class="action-button" onclick="updateQuoteStatus('accepted')">
-                <span>Accept</span>
-            </button>
-            <button class="action-button" onclick="updateQuoteStatus('rejected')">
-                <span>Reject</span>
-            </button>
-        </div>
-        {% endif %}
-    </div>
-
-    <div class="messages-section">
-        <h3><span>Messages</span></h3>
-        <div class="message-list">
-            {% for message in messages %}
-            <div class="message-item">
-                <p><strong>{{ message.sender_name }}:</strong> {{ message.content }}</p>
-                <small>{{ message.created_at }}</small>
+        <div class="messages-section">
+            <h3>Messages</h3>
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="message">
+                        <p>{{ message.content }}</p>
+                        <small>{{ message.created_at }}</small>
+                    </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-
-        <div class="message-form">
-            <textarea id="messageContent" placeholder="Type your message..."></textarea>
-            <button class="action-button" onclick="sendMessage()">
-                <span>Send</span>
-            </button>
+            <form id="messageForm" onsubmit="sendMessage(event)">
+                <input type="text" name="content" placeholder="Type your message..." required>
+                <button type="submit" class="action-button">Send</button>
+            </form>
         </div>
     </div>
-</div>
-{% endblock %}
 
-<script>
-    async function updateQuoteStatus(status) {
-        const formData = new FormData();
-        formData.append('quote_id', '{{ quote.id }}');
-        formData.append('status', status);
-
-        try {
-            const response = await fetch('/update_quote', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-            if (data.success) {
-                location.reload();
+    <script>
+        async function submitPrice(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            try {
+                const response = await fetch('/update_quote', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } catch (error) {
-            console.error('Error:', error);
         }
-    }
 
-    async function sendMessage() {
-        const messageContent = document.getElementById('messageContent').value;
-        const formData = new FormData();
-        formData.append('quote_id', '{{ quote.id }}');
-        formData.append('content', messageContent);
-        formData.append('receiver_id', '{{ 1 if session.username != "admin" else quote.user_id }}');
-
-        try {
-            const response = await fetch('/send_message', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-            if (data.success) {
-                location.reload();
-                document.getElementById('messageContent').value = ''; // Clear the message input
+        async function respondToQuote(status) {
+            const formData = new FormData();
+            formData.append('quote_id', '{{ quote.id }}');
+            formData.append('status', status);
+            
+            try {
+                const response = await fetch('/update_quote', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } catch (error) {
-            console.error('Error:', error);
         }
-    }
-</script>
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            formData.append('quote_id', '{{ quote.id }}');
+            formData.append('receiver_id', '{{ 1 if session.username != "admin" else quote.user_id }}');
+            
+            try {
+                const response = await fetch('/send_message', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
