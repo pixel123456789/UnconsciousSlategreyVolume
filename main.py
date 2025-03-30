@@ -50,7 +50,7 @@ def init_db():
                     user_id INTEGER NOT NULL,
                     title TEXT NOT NULL,
                     description TEXT NOT NULL,
-                    status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'quoted', 'accepted', 'rejected')),
+                    status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'quoted', 'accepted', 'rejected', 'converted')),
                     price REAL,
                     feedback TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
