@@ -119,14 +119,18 @@
     height: 88px;
     background: #000000;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
     padding-right: 15px;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .nav_links.active {
     left: 0;
+    opacity: 1;
+    visibility: visible;
   }
 
   .close-nav {
