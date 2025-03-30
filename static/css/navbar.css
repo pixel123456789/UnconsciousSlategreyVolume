@@ -208,6 +208,19 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+@media (max-width: 768px) {
+  .username {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: rotate(-90deg) translateX(-50%);
+    transform-origin: left;
+    margin: 0;
+    z-index: 1000;
+    border-radius: 0 0 4px 4px;
+  }
+}
+
 .username span {
   display: inline-block;
   transform: skew(20deg);
