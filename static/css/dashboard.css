@@ -136,16 +136,8 @@
     font-weight: 500;
     margin: 0.5rem 0;
     color: var(--color-white); /* Updated color */
+    background-color: var(--color-primary); /* Updated color */
 }
-
-.pending { background: var(--color-primary); }
-.quoted { background: var(--color-secondary); }
-.accepted { background: var(--color-tertiary); }
-.rejected { background: var(--color-quaternary); }
-.planning { background: var(--color-primary); }
-.in_progress { background: var(--color-secondary); }
-.review { background: var(--color-tertiary); }
-.completed { background: var(--color-quaternary); }
 
 /* Form Elements */
 input, textarea {
@@ -309,7 +301,7 @@ input, textarea {
     margin: 1rem 0;
 }
 
-.quote-details .status-badge {
+.status-badge {
     background: var(--color-primary);
     color: var(--color-white);
     font-family: 'Space Mono', monospace;
@@ -557,9 +549,9 @@ select, input[type="range"] {
 }
 
 .status-badge.planning { background: var(--color-primary); color: var(--color-white); }
-.status-badge.in_progress { background: var(--color-secondary); color: var(--color-white); }
-.status-badge.review { background: var(--color-tertiary); color: var(--color-white); }
-.status-badge.completed { background: var(--color-quaternary); color: var(--color-white); }
+.status-badge.in_progress { background: var(--color-primary); color: var(--color-white); }
+.status-badge.review { background: var(--color-primary); color: var(--color-white); }
+.status-badge.completed { background: var(--color-primary); color: var(--color-white); }
 
 .messages-section {
   background: var(--color-dark-gray);
