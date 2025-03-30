@@ -69,7 +69,7 @@ def init_db():
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     FOREIGN KEY (quote_id) REFERENCES quotes (id),
                     FOREIGN KEY (user_id) REFERENCES users (id))''')
-                    
+
         c.execute('''CREATE TABLE IF NOT EXISTS milestones
                     (id INTEGER PRIMARY KEY AUTOINCREMENT,
                     project_id INTEGER NOT NULL,
@@ -215,7 +215,7 @@ def login():
                 session['is_admin'] = user['is_admin']
                 flash('Welcome back!', 'success')
                 return redirect(url_for('dashboard'))
-            
+
             flash('Invalid username or password', 'error')
 
     return render_template('auth/login.html')
@@ -237,7 +237,7 @@ def dashboard():
                 JOIN users u ON q.user_id = u.id 
                 ORDER BY q.created_at DESC
             ''').fetchall()
-            
+
             projects = db.execute('''
                 SELECT p.*, q.title, u.username 
                 FROM projects p 
@@ -248,7 +248,7 @@ def dashboard():
         else:
             quotes = db.execute('SELECT * FROM quotes WHERE user_id = ? ORDER BY created_at DESC', 
                               [session['user_id']]).fetchall()
-            
+
             projects = db.execute('''
                 SELECT p.*, q.title 
                 FROM projects p 
@@ -288,7 +288,7 @@ def quote_details(quote_id):
             JOIN users u ON q.user_id = u.id 
             WHERE q.id = ?
         ''', [quote_id]).fetchone()
-        
+
         if not quote:
             flash('Quote not found', 'error')
             return redirect(url_for('dashboard'))
@@ -325,31 +325,31 @@ def upload_file(project_id):
     if 'file' not in request.files:
         flash('No file part', 'error')
         return redirect(url_for('project_details', project_id=project_id))
-    
+
     file = request.files['file']
     if file.filename == '':
         flash('No selected file', 'error')
         return redirect(url_for('project_details', project_id=project_id))
-    
+
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         if not os.path.exists(UPLOAD_FOLDER):
             os.makedirs(UPLOAD_FOLDER)
-        
+
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         file.save(file_path)
-        
+
         with get_db() as db:
             db.execute(
                 'INSERT INTO project_files (project_id, filename, file_path) VALUES (?, ?, ?)',
                 [project_id, filename, file_path]
             )
             db.commit()
-            
+
         flash('File uploaded successfully', 'success')
     else:
         flash('File type not allowed', 'error')
-    
+
     return redirect(url_for('project_details', project_id=project_id))
 
 @app.route('/download_file/<int:file_id>')
@@ -421,14 +421,14 @@ def create_quote():
         try:
             db.execute('INSERT INTO quotes (user_id, title, description) VALUES (?, ?, ?)',
                       [session['user_id'], title, description])
-            
+
             admin = db.execute('SELECT id FROM users WHERE is_admin = 1').fetchone()
             if admin:
                 db.execute('''
                     INSERT INTO notifications (user_id, content, type) 
                     VALUES (?, ?, ?)
                 ''', [admin['id'], f'New quote request: {title}', 'info'])
-            
+
             db.commit()
             flash('Quote request submitted successfully', 'success')
         except sqlite3.Error as e:
@@ -455,7 +455,7 @@ def update_quote():
         if session.get('is_admin'):
             if status == 'quoted' and not price:
                 return jsonify({'success': False, 'error': 'Price is required for quotes'})
-            
+
             try:
                 price = float(price) if price else None
                 db.execute('''
@@ -483,10 +483,10 @@ def update_quote():
                     INSERT INTO projects (quote_id, user_id, start_date) 
                     VALUES (?, ?, ?)
                 ''', [quote_id, quote['user_id'], date.today()])
-                
+
                 # Delete the quote after creating the project
                 db.execute('DELETE FROM quotes WHERE id = ?', [quote_id])
-                
+
                 admin = db.execute('SELECT id FROM users WHERE is_admin = 1').fetchone()
                 if admin:
                     db.execute('''
@@ -583,19 +583,6 @@ def send_message():
             return jsonify({'success': False, 'error': 'Error sending message'})
 
 @app.route('/mark_notification_read', methods=['POST'])
-@login_required
-@app.route('/services')
-def services():
-    return render_template('services.html')
-
-@app.route('/portfolio')
-def portfolio():
-    return render_template('portfolio.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
 def mark_notification_read():
     notification_id = request.form['notification_id']
 
@@ -609,13 +596,26 @@ def mark_notification_read():
 
     return jsonify({'success': True})
 
+@app.route('/services')
+def services():
+    return render_template('services.html')
+
+@app.route('/portfolio')
+def portfolio():
+    return render_template('portfolio.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
 if __name__ == '__main__':
     try:
         # Create instance directory if it doesn't exist
         if not os.path.exists('instance'):
             os.makedirs('instance')
             print("Created instance directory")
-        
+
         # Initialize database directly
         db = sqlite3.connect('instance/database.db')
         with db:
@@ -625,7 +625,7 @@ if __name__ == '__main__':
             db.execute('SELECT 1').fetchone()
             print("Database connection verified")
         db.close()
-        
+
         # Run the app
         app.run(host='0.0.0.0', port=5000)
     except Exception as e:
