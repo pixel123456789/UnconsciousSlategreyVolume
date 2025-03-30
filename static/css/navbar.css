@@ -230,6 +230,14 @@
 
   .nav_links {
     overscroll-behavior-x: contain;
+    max-width: 100vw;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .nav_links::-webkit-scrollbar {
+    display: none;
   }
 }
 
