@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 
-#last_btn{
-  width: 200px;
-  margin-right: -85px
-}
 
-.spanlast{
-  margin-right:50px
-}
 #nav {
   display: flex;
   align-items: center;
@@ -222,10 +215,6 @@
     margin: 0;
     z-index: 1000;
     border-radius: 0 0 4px 4px;
-  }
-
-  #last_btn {
-    margin-right: -15;
   }
 
   .nav_links {
