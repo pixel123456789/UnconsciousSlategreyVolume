@@ -132,6 +132,8 @@
     align-items: center;
     transition: 0.3s;
     opacity: 0;
+    overflow-x: auto;
+    overflow-y: auto;
   }
 
   .nav_links.active {
@@ -163,7 +165,7 @@
     margin-right: 15px;
   }
 
-  .hamburger, .close-nav {
+  .close-nav {
     display: none;
   }
 }
@@ -179,7 +181,7 @@
   .hamburger.active div:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
   }
-}
+
 
 .nav-center {
   display: flex;
