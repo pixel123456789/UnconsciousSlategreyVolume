@@ -215,14 +215,21 @@
 
 @media (max-width: 768px) {
   .username {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    transform: rotate(-90deg) translateX(-50%);
-    transform-origin: left;
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    transform: skew(-20deg);
     margin: 0;
     z-index: 1000;
     border-radius: 0 0 4px 4px;
+  }
+
+  #last_btn {
+    margin-right: -15px;
+  }
+
+  .nav_links {
+    overscroll-behavior-x: contain;
   }
 }
 
