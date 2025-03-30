@@ -1,7 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
-    const closeNav = document.querySelector('.close-nav');
     const navLinks = document.querySelector('.nav_links');
     
     hamburger?.addEventListener('click', (e) => {
@@ -10,10 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('active');
     });
 
-    // Close menu when clicking outside
-    document.querySelector('.close-menu')?.addEventListener('click', () => {
+    window.closeNavMobile = () => {
         hamburger?.classList.remove('active');
         navLinks?.classList.remove('active');
+    };
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
+            closeNavMobile();
+        }
     });
 
     document.addEventListener('click', (e) => {

@@ -72,16 +72,29 @@
 }
 
 .close-nav {
-  display: inline-block;
-  position: fixed;
-  left: 20px;
-  top: 32px;
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 20px;
   cursor: pointer;
   z-index: 1002;
   color: white;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  text-shadow: 0 0 4px rgba(0,0,0,0.5);
+  background: rebeccapurple;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.nav_links.active .close-nav {
+  display: block;
+  transform: translateX(0);
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
