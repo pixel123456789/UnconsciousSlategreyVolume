@@ -479,12 +479,18 @@ def update_quote():
             ''', [status, feedback, quote_id])
 
             if status == 'accepted':
+                # Create project from quote
                 db.execute('''
-                    INSERT INTO projects (quote_id, user_id, start_date) 
-                    VALUES (?, ?, ?)
-                ''', [quote_id, quote['user_id'], date.today()])
-
-                # Delete the quote after creating the project
+                    INSERT INTO projects (quote_id, user_id, title, description, start_date, status) 
+                    SELECT ?, user_id, title, description, ?, 'planning'
+                    FROM quotes 
+                    WHERE id = ?
+                ''', [quote_id, date.today(), quote_id])
+                
+                # Get the created project
+                project = db.execute('SELECT id FROM projects WHERE quote_id = ?', [quote_id]).fetchone()
+                
+                # Delete the quote after creating project
                 db.execute('DELETE FROM quotes WHERE id = ?', [quote_id])
 
                 admin = db.execute('SELECT id FROM users WHERE is_admin = 1').fetchone()
