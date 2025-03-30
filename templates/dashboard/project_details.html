@@ -23,6 +23,25 @@
         </div>
 
         <div class="project-details">
+    <div class="file-upload-section">
+        <h3>Project Files</h3>
+        <form action="/upload_file/{{ project.id }}" method="post" enctype="multipart/form-data" class="upload-form">
+            <input type="file" name="file" required class="file-input">
+            <button type="submit" class="action-button">Upload File</button>
+        </form>
+        
+        <div class="files-list">
+            {% for file in project_files %}
+            <div class="file-item">
+                <span class="file-name">{{ file.filename }}</span>
+                <div class="file-actions">
+                    <a href="/download_file/{{ file.id }}" class="action-button small">Download</a>
+                    <button onclick="deleteFile({{ file.id }})" class="action-button small danger">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
             <div class="project-section">
                 <h3>Project Overview</h3>
                 <p>{{ project.description }}</p>

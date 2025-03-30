@@ -5,15 +5,56 @@
     <title>About - InI Development</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 </head>
 <body>
     {% include 'components/navbar.html' %}
-    <div class="about-container">
-        <h1>About InI Development</h1>
-        <p>Innovative web development solutions for modern businesses.</p>
-        <div class="contact-info">
-            <h2>Contact</h2>
-            <p>Email: liamaaronkinnaird1@outlook.com</p>
+    <div class="about-container animate-fade-in">
+        <div class="about-header">
+            <h1>About InI Development</h1>
+            <p class="subtitle">Innovative web development solutions for modern businesses</p>
+        </div>
+        
+        <div class="about-content">
+            <div class="about-section animate-slide-up">
+                <h2>Our Mission</h2>
+                <p>Creating cutting-edge digital solutions that help businesses thrive in the modern world.</p>
+            </div>
+
+            <div class="about-section animate-slide-up">
+                <h2>Technology Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                        </ul>
+                    </div>
+                    <div class="tech-item">
+                        <h3>Backend</h3>
+                        <ul>
+                            <li>Python</li>
+                            <li>Flask</li>
+                            <li>SQLite</li>
+                            <li>RESTful APIs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section animate-slide-up">
+                <h2>Contact</h2>
+                <div class="contact-info">
+                    <p>Email: liamaaronkinnaird1@outlook.com</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">GitHub</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

@@ -310,6 +310,70 @@ def quote_details(quote_id):
                              messages=messages,
                              statuses=QUOTE_STATUSES)
 
+import os
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'instance/uploads'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/upload_file/<int:project_id>', methods=['POST'])
+@login_required
+def upload_file(project_id):
+    if 'file' not in request.files:
+        flash('No file part', 'error')
+        return redirect(url_for('project_details', project_id=project_id))
+    
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file', 'error')
+        return redirect(url_for('project_details', project_id=project_id))
+    
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
+        
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
+        file.save(file_path)
+        
+        with get_db() as db:
+            db.execute(
+                'INSERT INTO project_files (project_id, filename, file_path) VALUES (?, ?, ?)',
+                [project_id, filename, file_path]
+            )
+            db.commit()
+            
+        flash('File uploaded successfully', 'success')
+    else:
+        flash('File type not allowed', 'error')
+    
+    return redirect(url_for('project_details', project_id=project_id))
+
+@app.route('/download_file/<int:file_id>')
+@login_required
+def download_file(file_id):
+    with get_db() as db:
+        file = db.execute('SELECT * FROM project_files WHERE id = ?', [file_id]).fetchone()
+        if file:
+            return send_file(file['file_path'], as_attachment=True)
+    flash('File not found', 'error')
+    return redirect(url_for('dashboard'))
+
+@app.route('/delete_file/<int:file_id>', methods=['POST'])
+@login_required
+def delete_file(file_id):
+    with get_db() as db:
+        file = db.execute('SELECT * FROM project_files WHERE id = ?', [file_id]).fetchone()
+        if file:
+            os.remove(file['file_path'])
+            db.execute('DELETE FROM project_files WHERE id = ?', [file_id])
+            db.commit()
+            return jsonify({'success': True})
+    return jsonify({'success': False, 'error': 'File not found'})
+
 @app.route('/project/<int:project_id>')
 @login_required
 def project_details(project_id):
