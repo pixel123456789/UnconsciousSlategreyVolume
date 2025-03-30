@@ -132,15 +132,13 @@
   }
 
   .close-nav {
-    margin-right: 10px;
     display: none;
     transform: none;
     opacity: 1;
     position: relative;
-    left: auto;
     height: 40px;
     align-self: center;
-    margin-top: 0px;
+    margin: 0 auto 0 24px;
   }
 
   .nav_links.active .close-nav {
