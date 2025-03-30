@@ -122,15 +122,17 @@
   }
 
   .close-nav {
-    position: absolute;
-    left: 20px;
+    margin-right: 10px;
     display: none;
     transform: none;
     opacity: 1;
+    position: relative;
+    left: auto;
+    height: 40px;
   }
 
   .nav_links.active .close-nav {
-    display: block;
+    display: inline-block;
   }
 
   .nav_btn {
