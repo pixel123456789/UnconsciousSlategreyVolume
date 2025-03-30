@@ -1,39 +1,33 @@
 
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav_links');
-    
-    hamburger?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        navLinks.style.transform = navLinks.classList.contains('active') ? 'translateX(0)' : 'translateX(100%)';
-    });
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav_links');
 
-    window.closeNavMobile = () => {
-        hamburger?.classList.remove('active');
-        navLinks?.classList.remove('active');
-    };
+function toggleMobileNav() {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+}
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
-            closeNavMobile();
+function closeNavMobile() {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('active');
+}
+
+function toggleNotifications() {
+    const dropdown = document.getElementById('notificationDropdown');
+    dropdown.classList.toggle('show');
+}
+
+// Close notifications dropdown when clicking outside
+window.onclick = function(event) {
+    if (!event.target.matches('.notification-icon')) {
+        const dropdowns = document.getElementsByClassName('notification-dropdown');
+        for (let dropdown of dropdowns) {
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
         }
-    });
+    }
+}
 
-    document.addEventListener('click', (e) => {
-        if (!hamburger?.contains(e.target) && !navLinks?.contains(e.target)) {
-            hamburger?.classList.remove('active');
-            navLinks?.classList.remove('active');
-        }
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav_btn').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger?.classList.remove('active');
-            navLinks?.classList.remove('active');
-        });
-    });
-});
+// Add click event to hamburger menu
+hamburger.addEventListener('click', toggleMobileNav);
