@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
-        navLinks.style.transform = navLinks.classList.contains('active') ? 'translateX(0)' : 'translateX(100%)';
+        navLinks.style.transform = navLinks.classList.contains('active') ? 'translateX(0)' : 'translateX(-100%)';
     });
 
     window.closeNavMobile = () => {
