@@ -83,7 +83,7 @@
   display: none;
   position: absolute;
   right: 20px;
-  top: 50%;
+  top: 0%;
   transform: translateY(-50%) skew(-20deg);
   cursor: pointer;
   z-index: 1002;

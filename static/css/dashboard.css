@@ -207,7 +207,7 @@ input, textarea {
     text-transform: uppercase;
     letter-spacing: -1px;
     margin-bottom: 20px;
-    color: var(--color-primary); /* Updated color */
+    color: var(--color-white); /* Updated color */
 }
 
 .items-grid {
