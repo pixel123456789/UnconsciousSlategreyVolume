@@ -7,7 +7,7 @@ import os
 from contextlib import contextmanager
 import re
 
-QUOTE_STATUSES = ['pending', 'quoted', 'accepted', 'rejected']
+QUOTE_STATUSES = ['pending', 'quoted', 'accepted', 'rejected', 'converted']
 PROJECT_STATUSES = ['planning', 'in_progress', 'review', 'completed']
 
 app = Flask(__name__)
@@ -492,8 +492,8 @@ def update_quote():
                 # Get the created project
                 project = db.execute('SELECT id FROM projects WHERE quote_id = ?', [quote_id]).fetchone()
                 
-                # Delete the quote after creating project
-                db.execute('DELETE FROM quotes WHERE id = ?', [quote_id])
+                # Update quote status to converted instead of deleting
+                db.execute('UPDATE quotes SET status = ? WHERE id = ?', ['converted', quote_id])
 
                 admin = db.execute('SELECT id FROM users WHERE is_admin = 1').fetchone()
                 if admin:
