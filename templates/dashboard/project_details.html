@@ -76,7 +76,21 @@
                     </form>
                     {% endif %}
                     <div id="milestonesList" class="milestones-list">
-                        <!-- Milestones will be loaded here -->
+                        {% for milestone in milestones %}
+                        <div class="milestone-item">
+                            <span>{{ milestone.title }}</span>
+                            <span>Due: {{ milestone.due_date }}</span>
+                            <label>
+                                <input type="checkbox" 
+                                       onchange="toggleMilestone({{ milestone.id }}, this.checked)"
+                                       {% if milestone.completed %}checked{% endif %}>
+                                Completed
+                            </label>
+                            {% if session.is_admin %}
+                            <button onclick="deleteMilestone({{ milestone.id }})" class="action-button small danger">Delete</button>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -96,7 +110,20 @@
                     </form>
                     {% endif %}
                     <div id="tasksList" class="tasks-list">
-                        <!-- Tasks will be loaded here -->
+                        {% for task in tasks %}
+                        <div class="task-item">
+                            <span class="priority-{{ task.priority }}">{{ task.title }}</span>
+                            <label>
+                                <input type="checkbox" 
+                                       onchange="toggleTask({{ task.id }}, this.checked)"
+                                       {% if task.completed %}checked{% endif %}>
+                                Completed
+                            </label>
+                            {% if session.is_admin %}
+                            <button onclick="deleteTask({{ task.id }})" class="action-button small danger">Delete</button>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -156,6 +183,130 @@
     </div>
 
     <script>
+        async function addMilestone(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            formData.append('project_id', '{{ project.id }}');
+            
+            try {
+                const response = await fetch('/add_milestone', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function toggleMilestone(id, completed) {
+            try {
+                const response = await fetch('/toggle_milestone', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        milestone_id: id,
+                        completed: completed
+                    })
+                });
+                
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function deleteMilestone(id) {
+            if (!confirm('Are you sure you want to delete this milestone?')) return;
+            
+            try {
+                const response = await fetch('/delete_milestone', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        milestone_id: id
+                    })
+                });
+                
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function addTask(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            formData.append('project_id', '{{ project.id }}');
+            
+            try {
+                const response = await fetch('/add_task', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function toggleTask(id, completed) {
+            try {
+                const response = await fetch('/toggle_task', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        task_id: id,
+                        completed: completed
+                    })
+                });
+                
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function deleteTask(id) {
+            if (!confirm('Are you sure you want to delete this task?')) return;
+            
+            try {
+                const response = await fetch('/delete_task', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        task_id: id
+                    })
+                });
+                
+                if (response.ok) {
+                    location.reload();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
         async function updateProgress() {
             const progress = document.getElementById('progressSlider').value;
             const formData = new FormData();

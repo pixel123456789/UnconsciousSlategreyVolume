@@ -404,9 +404,30 @@ def project_details(project_id):
             ORDER BY m.created_at DESC
         ''', [project_id]).fetchall()
 
+        milestones = db.execute('''
+            SELECT * FROM milestones 
+            WHERE project_id = ? 
+            ORDER BY due_date ASC
+        ''', [project_id]).fetchall()
+
+        tasks = db.execute('''
+            SELECT * FROM tasks 
+            WHERE project_id = ? 
+            ORDER BY created_at DESC
+        ''', [project_id]).fetchall()
+
+        project_files = db.execute('''
+            SELECT * FROM project_files 
+            WHERE project_id = ? 
+            ORDER BY uploaded_at DESC
+        ''', [project_id]).fetchall()
+
         return render_template('dashboard/project_details.html',
                              project=project,
                              messages=messages,
+                             milestones=milestones,
+                             tasks=tasks,
+                             project_files=project_files,
                              statuses=PROJECT_STATUSES)
 
 @app.route('/create_quote', methods=['POST'])
@@ -600,6 +621,108 @@ def mark_notification_read():
             SET is_read = 1 
             WHERE id = ? AND user_id = ?
         ''', [notification_id, session['user_id']])
+        db.commit()
+
+    return jsonify({'success': True})
+
+@app.route('/add_milestone', methods=['POST'])
+@login_required
+def add_milestone():
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+
+    project_id = request.form['project_id']
+    title = request.form['title']
+    due_date = request.form['due_date']
+
+    with get_db() as db:
+        db.execute('''
+            INSERT INTO milestones (project_id, title, due_date)
+            VALUES (?, ?, ?)
+        ''', [project_id, title, due_date])
+        db.commit()
+
+    return jsonify({'success': True})
+
+@app.route('/toggle_milestone', methods=['POST'])
+@login_required
+def toggle_milestone():
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+
+    data = request.get_json()
+    milestone_id = data['milestone_id']
+    completed = data['completed']
+
+    with get_db() as db:
+        db.execute('UPDATE milestones SET completed = ? WHERE id = ?',
+                  [completed, milestone_id])
+        db.commit()
+
+    return jsonify({'success': True})
+
+@app.route('/delete_milestone', methods=['POST'])
+@login_required
+def delete_milestone():
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+
+    data = request.get_json()
+    milestone_id = data['milestone_id']
+
+    with get_db() as db:
+        db.execute('DELETE FROM milestones WHERE id = ?', [milestone_id])
+        db.commit()
+
+    return jsonify({'success': True})
+
+@app.route('/add_task', methods=['POST'])
+@login_required
+def add_task():
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+
+    project_id = request.form['project_id']
+    title = request.form['title']
+    priority = request.form['priority']
+
+    with get_db() as db:
+        db.execute('''
+            INSERT INTO tasks (project_id, title, priority)
+            VALUES (?, ?, ?)
+        ''', [project_id, title, priority])
+        db.commit()
+
+    return jsonify({'success': True})
+
+@app.route('/toggle_task', methods=['POST'])
+@login_required
+def toggle_task():
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+
+    data = request.get_json()
+    task_id = data['task_id']
+    completed = data['completed']
+
+    with get_db() as db:
+        db.execute('UPDATE tasks SET completed = ? WHERE id = ?',
+                  [completed, task_id])
+        db.commit()
+
+    return jsonify({'success': True})
+
+@app.route('/delete_task', methods=['POST'])
+@login_required
+def delete_task():
+    if not session.get('is_admin'):
+        return jsonify({'success': False, 'error': 'Admin access required'})
+
+    data = request.get_json()
+    task_id = data['task_id']
+
+    with get_db() as db:
+        db.execute('DELETE FROM tasks WHERE id = ?', [task_id])
         db.commit()
 
     return jsonify({'success': True})
