@@ -208,7 +208,7 @@ body {
     height: 100vh;
     background: var(--color-black);
     flex-direction: column;
-    padding: 120px 0;
+    
     transition: 0.3s;
   }
 
