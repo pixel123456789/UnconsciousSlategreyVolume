@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/services.css') }}">
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    <div class="services-container">
+        <h1>Our Services</h1>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Web Development</h3>
+                <p>Custom websites built with modern technologies</p>
+                <ul>
+                    <li>Responsive Design</li>
+                    <li>E-commerce Solutions</li>
+                    <li>CMS Integration</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>API Development</h3>
+                <p>Robust backend solutions</p>
+                <ul>
+                    <li>RESTful APIs</li>
+                    <li>Database Design</li>
+                    <li>Authentication Systems</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>Maintenance</h3>
+                <p>Keeping your systems running smoothly</p>
+                <ul>
+                    <li>Performance Optimization</li>
+                    <li>Security Updates</li>
+                    <li>Technical Support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}">
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    <div class="portfolio-container">
+        <h1>Our Work</h1>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-image"></div>
+                <h3>E-commerce Platform</h3>
+                <p>Custom shopping solution with integrated payment system</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image"></div>
+                <h3>Business Website</h3>
+                <p>Modern business presence with booking system</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-image"></div>
+                <h3>Mobile App</h3>
+                <p>Cross-platform application for service management</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

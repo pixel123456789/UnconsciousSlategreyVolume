@@ -584,6 +584,18 @@ def send_message():
 
 @app.route('/mark_notification_read', methods=['POST'])
 @login_required
+@app.route('/services')
+def services():
+    return render_template('services.html')
+
+@app.route('/portfolio')
+def portfolio():
+    return render_template('portfolio.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 def mark_notification_read():
     notification_id = request.form['notification_id']
 
