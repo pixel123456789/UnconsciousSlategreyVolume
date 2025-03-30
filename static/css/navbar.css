@@ -81,7 +81,7 @@
 
 .close-nav {
   position: fixed;
-  right: 20px;
+  right: 80px;
   top: 88px;
   transform: skew(-20deg);
   cursor: pointer;
