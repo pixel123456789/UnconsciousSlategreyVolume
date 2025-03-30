@@ -337,10 +337,10 @@ body {
 input, select, textarea {
   width: 100%;
   padding: 12px;
-  background: var(--color-black);
+  background: var(--color-dark-gray);
   border: 1px solid var(--color-dark-gray);
   border-left: 2px solid var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-black);
   font-family: var(--font-mono);
   margin-bottom: 1rem;
   border-radius: 4px;
@@ -387,7 +387,7 @@ input:focus, select:focus, textarea:focus {
   overflow-y: auto;
   margin: 1rem 0;
   padding: 1rem;
-  background: var(--color-black);
+  background: var(--color-dark-gray);
 }
 
 .message {

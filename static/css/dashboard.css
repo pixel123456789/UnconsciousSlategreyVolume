@@ -141,7 +141,7 @@
 
 /* Form Elements */
 input, textarea {
-    background: var(--color-black); /* Updated background */
+    background: var(--color-dark-gray); /* Updated background */
     border: none;
     border-left: 2px solid var(--color-primary); /* Updated color */
     color: var(--color-white); /* Updated color */
@@ -558,7 +558,7 @@ select, input[type="range"] {
 .status-badge.completed { background: var(--color-primary); color: var(--color-white); }
 
 .messages-section {
-  background: var(--color-dark-gray);
+  background: var(--color-black);
   padding: 1.5rem;
   border-radius: 8px;
   border-left: 4px solid var(--color-primary);

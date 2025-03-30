@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="messages-section">
+        <div class="messages-section" style="background-color:var(--color-dark-gray)">
             <h3><span>Messages</span></h3>
             <div class="messages-container">
                 {% for message in messages %}
@@ -64,7 +64,7 @@
                 <form id="messageForm" onsubmit="sendMessage(event)">
                     <input type="hidden" name="quote_id" value="{{ quote.id }}">
                     <input type="hidden" name="receiver_id" value="{% if session.is_admin %}{{ quote.user_id }}{% else %}1{% endif %}">
-                    <textarea name="content" placeholder="Type your message..." required></textarea>
+                    <textarea style="background-color:var(--color-black)" name="content" placeholder="Type your message..." required></textarea>
                     <button type="submit" class="action-button"><span>Send Message</span></button>
                 </form>
             </div>
