@@ -120,8 +120,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
-    background: #000000;
+    height: 88px;
+    background: var(--color-black);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -131,7 +131,8 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 0 10px;
+    padding: 0 15px;
+    transition: transform 0.3s ease;
   }
 
   .nav_links::-webkit-scrollbar {
@@ -140,12 +141,13 @@
 
   .nav_btn {
     transform: skew(-20deg);
-    min-width: 100px;
-    height: 50px;
-    margin: 0 5px;
+    min-width: 120px;
+    height: 88px;
+    margin: 0;
     border: none;
+    border-right: 8px solid var(--color-black);
     flex-shrink: 0;
-    background: #1a1a1a;
+    background: var(--color-primary);
     transition: all 0.3s ease;
   }
 
