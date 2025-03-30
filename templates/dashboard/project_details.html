@@ -97,20 +97,25 @@
                 </div>
             </div>
 
-            <div class="project-section">
-                <h3>Communication</h3>
+            <div class="messages-section">
+                <h3><span>Messages</span></h3>
                 <div class="messages-container">
                     {% for message in messages %}
-                    <div class="message {% if message.sender_id == session.user_id %}sent{% else %}received{% endif %}">
-                        <p>{{ message.content }}</p>
-                        <small>{{ message.sender_name }} - {{ message.created_at }}</small>
+                    <div class="message">
+                        <p><span>{{ message.content }}</span></p>
+                        <small><span>{{ message.sender_name }} - {{ message.created_at }}</span></small>
                     </div>
                     {% endfor %}
                 </div>
-                <form id="messageForm" onsubmit="sendMessage(event)">
-                    <input type="text" name="content" placeholder="Type your message..." required>
-                    <button type="submit" class="action-button">Send</button>
-                </form>
+
+                <div class="message-form">
+                    <form id="messageForm" onsubmit="sendMessage(event)">
+                        <input type="hidden" name="project_id" value="{{ project.id }}">
+                        <input type="hidden" name="receiver_id" value="{% if session.is_admin %}{{ project.user_id }}{% else %}1{% endif %}">
+                        <textarea name="content" placeholder="Type your message..." required></textarea>
+                        <button type="submit" class="action-button"><span>Send Message</span></button>
+                    </form>
+                </div>
             </div>
 
             {% if session.is_admin %}

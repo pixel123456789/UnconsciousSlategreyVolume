@@ -389,18 +389,22 @@ input, textarea {
     color: var(--color-white); /* Updated color */
 }
 
-.message.sent {
-    margin-left: 20%;
-    background: var(--color-white); /* Updated background */
+.message {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--color-white);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-.message.received {
-    margin-right: 20%;
-    background: var(--color-white); /* Updated background */
+.message p {
+    color: var(--color-dark-gray);
+    margin-bottom: 0.5rem;
 }
 
-.message p{
-    color:var(--color-dark-gray)
+.message small {
+    color: var(--color-mid-gray);
+    font-size: 0.875rem;
 }
 .status-badge {
     padding: 0.5rem 1rem;
