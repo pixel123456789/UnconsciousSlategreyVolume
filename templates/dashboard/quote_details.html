@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,8 @@
     <link rel="stylesheet" href="/static/css/dashboard.css">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
-{% include 'components/navbar.html' %}
+<body>
+    {% include 'components/navbar.html' %}
 <div class="dashboard-container">
     <div class="quote-details">
         <h2>{{ quote.title }}</h2>
@@ -57,13 +57,13 @@
         async function submitPrice(e) {
             e.preventDefault();
             const formData = new FormData(e.target);
-            
+
             try {
                 const response = await fetch('/update_quote', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();
@@ -77,13 +77,13 @@
             const formData = new FormData();
             formData.append('quote_id', '{{ quote.id }}');
             formData.append('status', status);
-            
+
             try {
                 const response = await fetch('/update_quote', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();
@@ -98,13 +98,13 @@
             const formData = new FormData(e.target);
             formData.append('quote_id', '{{ quote.id }}');
             formData.append('receiver_id', '{{ 1 if session.username != "admin" else quote.user_id }}');
-            
+
             try {
                 const response = await fetch('/send_message', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();
