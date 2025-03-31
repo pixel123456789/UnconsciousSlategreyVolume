@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, send_file
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from datetime import datetime, date
@@ -358,19 +358,25 @@ def upload_file(project_id):
 @login_required
 def download_file(file_id):
     with get_db() as db:
+        # Get file with project info to check access
         file = db.execute('''
-            SELECT f.*, p.user_id 
+            SELECT f.*, p.user_id, p.id as project_id
             FROM project_files f
             JOIN projects p ON f.project_id = p.id 
             WHERE f.id = ?
         ''', [file_id]).fetchone()
         
-        if file and (session.get('is_admin') or file['user_id'] == session['user_id']):
-            return send_file(file['file_path'], as_attachment=True)
-        flash('Access denied', 'error')
+        if file:
+            # Check if user has access to this project's files
+            if session.get('is_admin') or file['user_id'] == session['user_id']:
+                try:
+                    return send_file(file['file_path'], as_attachment=True)
+                except Exception as e:
+                    flash('Error downloading file', 'error')
+                    return redirect(url_for('project_details', project_id=file['project_id']))
+            
+        flash('Access denied or file not found', 'error')
         return redirect(url_for('dashboard'))
-    flash('File not found', 'error')
-    return redirect(url_for('dashboard'))
 
 @app.route('/delete_file/<int:file_id>', methods=['POST'])
 @login_required
