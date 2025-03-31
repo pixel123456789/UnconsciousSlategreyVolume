@@ -431,6 +431,41 @@ input:focus, select:focus, textarea:focus {
     width: 100%;
     max-width: none;
     margin: 0.5rem 0;
+    transform: none;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .about-section {
+    padding: 1rem !important;
+  }
+  
+  .contact-container,
+  .about-container,
+  .services-container,
+  .portfolio-container {
+    padding: 80px 1rem 2rem !important;
+  }
+  
+  .auth-container {
+    margin: 80px 1rem !important;
+    width: auto !important;
+    padding: 1.5rem !important;
   }
 }
 

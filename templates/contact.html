@@ -14,11 +14,12 @@
     <div class="contact-container">
         <h1>Get In Touch</h1>
         <div class="contact-content">
-            <form class="contact-form" action="/send_message" method="POST">
+            <form class="contact-form" action="mailto:liamaaronkinnaird1@outlook.com" method="POST" enctype="text/plain">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" placeholder="Your Message" required></textarea>
                 <button type="submit" class="action-button">Send Message</button>
+                <p class="contact-note">Opens your default email client to send the message</p>
             </form>
         </div>
     </div>
