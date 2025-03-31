@@ -47,6 +47,15 @@
   transform: skew(-20deg);
 }
 
+@media (max-width: 768px) {
+  .auth-container button {
+    transform: none;
+  }
+  .auth-container button:hover {
+    transform: none;
+  }
+}
+
 .auth-container button:hover {
   background: var(--color-primary-dark);
   transform: skew(-20deg) scale(1.02);
