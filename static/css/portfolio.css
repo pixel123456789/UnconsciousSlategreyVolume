@@ -1,4 +1,11 @@
 
+.sly-remark {
+    font-style: italic;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
 .portfolio-container {
     padding: 120px 5% 60px;
     max-width: 1200px;
