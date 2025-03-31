@@ -9,7 +9,7 @@
   --color-light-gray: #cccccc;
   --color-white: #ffffff;
   --font-primary: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: -apple-system, BlinkMacSystemFont, "SF Pro Mono", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: 'Space Mono', monospace;
 }
 
 /* Base Styles */
@@ -506,6 +506,7 @@ input:focus, select:focus, textarea:focus {
 .service-card p {
   color: var(--color-light-gray);
   font-family: var(--font-mono);
+  font-size: 0.9rem;
 }
 
 .about {
