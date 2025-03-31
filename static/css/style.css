@@ -369,6 +369,14 @@ input:focus, select:focus, textarea:focus {
   transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+  .action-button {
+    width: 100%;
+    max-width: none;
+    margin: 0.5rem 0;
+  }
+}
+
 .action-button:hover {
   background: var(--color-primary-dark);
 }
