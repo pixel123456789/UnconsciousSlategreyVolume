@@ -21,13 +21,14 @@
 }
 
 .hero-title {
-    font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-size: 4.5rem;
     color: white;
     line-height: 1.1;
     margin: 0;
     transform: skew(-5deg);
     font-weight: 900;
+    -webkit-text-stroke: 1px white;
 }
 
 .hero-title .highlight {
