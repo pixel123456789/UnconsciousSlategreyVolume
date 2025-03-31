@@ -209,9 +209,6 @@ input, textarea {
     border-left: 4px solid var(--color-primary); 
 }
 
-#last_btn {
-    margin-right: -210px;
-}
 
 .dashboard-section h3 {
     font-family: 'Arial Black', Arial, sans-serif;
