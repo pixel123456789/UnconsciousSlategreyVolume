@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,54 +7,41 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tutorial.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sitemap.css') }}">
 </head>
 <body>
     {% include 'components/navbar.html' %}
-    
-    <div class="sitemap">
+
+    <div class="sitemap-container">
         <h1>Site Map</h1>
-        <button onclick="tutorial.start()" 
-                style="background: rebeccapurple; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 20px 0;">
-            Start Interactive Tour
-        </button>
-        
         <div class="sitemap-grid">
             <a href="/" class="sitemap-item">
                 <h3>Home</h3>
-                <p>Start your journey here</p>
+                <p>Modern web development solutions for your business</p>
             </a>
             <a href="/services" class="sitemap-item">
                 <h3>Services</h3>
-                <p>Web development solutions</p>
+                <p>Custom web development, API integration, and maintenance</p>
             </a>
             <a href="/portfolio" class="sitemap-item">
                 <h3>Portfolio</h3>
-                <p>View our work</p>
+                <p>Explore our successful projects and implementations</p>
             </a>
             <a href="/contact" class="sitemap-item">
                 <h3>Contact</h3>
-                <p>Get in touch</p>
+                <p>Get in touch for project inquiries and consultations</p>
             </a>
             <a href="/login" class="sitemap-item">
-                <h3>Login</h3>
-                <p>Access dashboard</p>
+                <h3>Client Portal</h3>
+                <p>Access your project dashboard and resources</p>
             </a>
             {% if session.get('is_admin') %}
             <a href="/dashboard" class="sitemap-item">
                 <h3>Admin Dashboard</h3>
-                <p>Manage projects</p>
+                <p>Project management and client communications hub</p>
             </a>
             {% endif %}
         </div>
     </div>
-
-    <script src="{{ url_for('static', filename='js/tutorial.js') }}"></script>
-    <script>
-        // Initialize tutorial when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            window.tutorial = new TutorialGuide();
-        });
-    </script>
 </body>
 </html>

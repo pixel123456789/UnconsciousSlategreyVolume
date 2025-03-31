@@ -1,0 +1,71 @@
+
+.sitemap-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 88px auto 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.sitemap-container h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    transform: skew(-5deg);
+    color: white;
+}
+
+.sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.sitemap-item {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid rebeccapurple;
+    text-decoration: none;
+    transform: skew(-5deg);
+}
+
+.sitemap-item:hover {
+    transform: skew(-5deg) translateY(-5px);
+    background: #222;
+}
+
+.sitemap-item h3 {
+    margin: 0 0 1rem 0;
+    color: rebeccapurple;
+    font-size: 1.6rem;
+    transform: skew(5deg);
+}
+
+.sitemap-item p {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 1rem;
+    line-height: 1.4;
+    transform: skew(5deg);
+}
+
+@media (max-width: 768px) {
+    .sitemap-container {
+        padding: 1rem;
+    }
+    
+    .sitemap-container h1 {
+        font-size: 2rem;
+    }
+    
+    .sitemap-grid {
+        gap: 1rem;
+    }
+    
+    .sitemap-item {
+        padding: 1.5rem;
+    }
+}
