@@ -63,9 +63,11 @@
     height: 60px;
     border: none;
     cursor: pointer;
-    font-family: 'Arial Black', 'Arial Bold', Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     letter-spacing: -1px;
+    font-weight: 800;
+    -webkit-font-smoothing: antialiased;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
