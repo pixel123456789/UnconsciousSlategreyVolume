@@ -440,7 +440,6 @@ input, textarea {
     width: 120px;
     height: 88px;
     margin: 0;
-    border: none;
     border-right: 8px solid var(--color-black); /* Updated color */
 }
 

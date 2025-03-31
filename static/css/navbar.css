@@ -155,7 +155,6 @@
     min-width: 120px;
     height: 88px;
     margin: 0;
-    border: none;
     border-right: 8px solid var(--color-black);
     flex-shrink: 0;
     background: var(--color-primary);
