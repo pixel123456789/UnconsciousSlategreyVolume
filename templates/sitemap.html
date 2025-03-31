@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map - InI Development</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tutorial.css') }}">
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+    
+    <div class="sitemap">
+        <h1>Site Map</h1>
+        <button onclick="tutorial.start()" 
+                style="background: rebeccapurple; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 20px 0;">
+            Start Interactive Tour
+        </button>
+        
+        <div class="sitemap-grid">
+            <a href="/" class="sitemap-item">
+                <h3>Home</h3>
+                <p>Start your journey here</p>
+            </a>
+            <a href="/services" class="sitemap-item">
+                <h3>Services</h3>
+                <p>Web development solutions</p>
+            </a>
+            <a href="/portfolio" class="sitemap-item">
+                <h3>Portfolio</h3>
+                <p>View our work</p>
+            </a>
+            <a href="/contact" class="sitemap-item">
+                <h3>Contact</h3>
+                <p>Get in touch</p>
+            </a>
+            <a href="/login" class="sitemap-item">
+                <h3>Login</h3>
+                <p>Access dashboard</p>
+            </a>
+            {% if session.get('is_admin') %}
+            <a href="/dashboard" class="sitemap-item">
+                <h3>Admin Dashboard</h3>
+                <p>Manage projects</p>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/tutorial.js') }}"></script>
+</body>
+</html>

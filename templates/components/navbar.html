@@ -17,6 +17,7 @@
             <button class="nav_btn" onclick="window.location.href='/services'"><span>Services</span></button>
             <button class="nav_btn" onclick="window.location.href='/portfolio'"><span>Portfolio</span></button>
             <button class="nav_btn" onclick="window.location.href='/contact'"><span>Contact</span></button>
+            <button class="nav_btn" onclick="window.location.href='/sitemap'"><span>Site Map</span></button>
             {% if 'user_id' not in session %}
             <button class="nav_btn" onclick="window.location.href='/login'"><span>Login</span></button>
             <button class="nav_btn" onclick="window.location.href='/register'" id="last_btn"><span class="spanlast">Register</span></button>
@@ -24,7 +25,7 @@
             <button class="nav_btn" onclick="window.location.href='/dashboard'"><span>Dashboard</span></button>
             <button class="nav_btn" onclick="window.location.href='/logout'" id="last_btn"><span class="spanlast">Logout</span></button>
             {% endif %}
-            
+
         </div>
     </nav>
 </div>
