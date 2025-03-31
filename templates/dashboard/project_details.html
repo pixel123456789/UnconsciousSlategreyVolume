@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="/static/js/project.js"></script>
 </head>
 <body style = "background-color:white">
     {% include 'components/navbar.html' %}
@@ -29,7 +29,7 @@
                 <input type="file" name="file" required class="file-input">
                 <button type="submit" class="action-button">Upload File</button>
             </form>
-            
+
             <div class="files-list">
                 {% if project_files %}
                     {% for file in project_files %}
@@ -193,13 +193,13 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             formData.append('project_id', '{{ project.id }}');
-            
+
             try {
                 const response = await fetch('/add_milestone', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 if (response.ok) {
                     location.reload();
                 }
@@ -220,7 +220,7 @@
                         completed: completed
                     })
                 });
-                
+
                 if (response.ok) {
                     location.reload();
                 }
@@ -231,7 +231,7 @@
 
         async function deleteMilestone(id) {
             if (!confirm('Are you sure you want to delete this milestone?')) return;
-            
+
             try {
                 const response = await fetch('/delete_milestone', {
                     method: 'POST',
@@ -242,7 +242,7 @@
                         milestone_id: id
                     })
                 });
-                
+
                 if (response.ok) {
                     location.reload();
                 }
@@ -255,13 +255,13 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             formData.append('project_id', '{{ project.id }}');
-            
+
             try {
                 const response = await fetch('/add_task', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 if (response.ok) {
                     location.reload();
                 }
@@ -282,7 +282,7 @@
                         completed: completed
                     })
                 });
-                
+
                 if (response.ok) {
                     location.reload();
                 }
@@ -293,7 +293,7 @@
 
         async function deleteTask(id) {
             if (!confirm('Are you sure you want to delete this task?')) return;
-            
+
             try {
                 const response = await fetch('/delete_task', {
                     method: 'POST',
@@ -304,7 +304,7 @@
                         task_id: id
                     })
                 });
-                
+
                 if (response.ok) {
                     location.reload();
                 }
@@ -319,13 +319,13 @@
             formData.append('project_id', '{{ project.id }}');
             formData.append('status', '{{ project.status }}');
             formData.append('progress', progress);
-            
+
             try {
                 const response = await fetch('/update_project', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();
@@ -340,13 +340,13 @@
             const formData = new FormData();
             formData.append('project_id', '{{ project.id }}');
             formData.append('status', status);
-            
+
             try {
                 const response = await fetch('/update_project', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();
@@ -361,13 +361,13 @@
             const formData = new FormData(e.target);
             formData.append('project_id', '{{ project.id }}');
             formData.append('receiver_id', '{{ 1 if session.username != "admin" else project.user_id }}');
-            
+
             try {
                 const response = await fetch('/send_message', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();

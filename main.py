@@ -358,9 +358,17 @@ def upload_file(project_id):
 @login_required
 def download_file(file_id):
     with get_db() as db:
-        file = db.execute('SELECT * FROM project_files WHERE id = ?', [file_id]).fetchone()
-        if file:
+        file = db.execute('''
+            SELECT f.*, p.user_id 
+            FROM project_files f
+            JOIN projects p ON f.project_id = p.id 
+            WHERE f.id = ?
+        ''', [file_id]).fetchone()
+        
+        if file and (session.get('is_admin') or file['user_id'] == session['user_id']):
             return send_file(file['file_path'], as_attachment=True)
+        flash('Access denied', 'error')
+        return redirect(url_for('dashboard'))
     flash('File not found', 'error')
     return redirect(url_for('dashboard'))
 
@@ -399,19 +407,21 @@ def project_details(project_id):
             flash('Access denied', 'error')
             return redirect(url_for('dashboard'))
 
-        messages = db.execute('''
-            SELECT m.*, u.username as sender_name 
-            FROM messages m 
-            JOIN users u ON m.sender_id = u.id 
-            WHERE m.project_id = ? 
-            ORDER BY m.created_at DESC
-        ''', [project_id]).fetchall()
+        # Only fetch messages and milestones if user has access to the project
+        if session.get('is_admin') or project['user_id'] == session['user_id']:
+            messages = db.execute('''
+                SELECT m.*, u.username as sender_name 
+                FROM messages m 
+                JOIN users u ON m.sender_id = u.id 
+                WHERE m.project_id = ? 
+                ORDER BY m.created_at DESC
+            ''', [project_id]).fetchall()
 
-        milestones = db.execute('''
-            SELECT * FROM milestones 
-            WHERE project_id = ? 
-            ORDER BY due_date ASC
-        ''', [project_id]).fetchall()
+            milestones = db.execute('''
+                SELECT * FROM milestones 
+                WHERE project_id = ? 
+                ORDER BY due_date ASC
+            ''', [project_id]).fetchall()
 
         tasks = db.execute('''
             SELECT * FROM tasks 
