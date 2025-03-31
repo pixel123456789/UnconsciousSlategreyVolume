@@ -51,5 +51,11 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/tutorial.js') }}"></script>
+    <script>
+        // Initialize tutorial when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.tutorial = new TutorialGuide();
+        });
+    </script>
 </body>
 </html>

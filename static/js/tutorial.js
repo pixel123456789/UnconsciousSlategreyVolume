@@ -28,6 +28,7 @@ class TutorialGuide {
     }
 
     start() {
+        this.currentStep = 0;
         this.overlay = document.createElement('div');
         this.overlay.className = 'tutorial-overlay';
         document.body.appendChild(this.overlay);
@@ -41,6 +42,7 @@ class TutorialGuide {
             return;
         }
 
+        this.clearStep();
         const step = this.steps[index];
         const element = document.querySelector(step.element);
         
@@ -54,35 +56,34 @@ class TutorialGuide {
         // Create highlight
         const highlight = document.createElement('div');
         highlight.className = 'tutorial-highlight';
-        highlight.style.top = `${rect.top - 5}px`;
-        highlight.style.left = `${rect.left - 5}px`;
-        highlight.style.width = `${rect.width + 10}px`;
-        highlight.style.height = `${rect.height + 10}px`;
-        
-        // Create step popup
+        highlight.style.top = `${rect.top - 4}px`;
+        highlight.style.left = `${rect.left - 4}px`;
+        highlight.style.width = `${rect.width + 8}px`;
+        highlight.style.height = `${rect.height + 8}px`;
+        document.body.appendChild(highlight);
+
+        // Create popup
         const popup = document.createElement('div');
         popup.className = 'tutorial-step';
+        popup.style.display = 'block';
         popup.innerHTML = `
             <p>${step.text}</p>
-            <button onclick="tutorial.showStep(${index + 1})" 
-                    style="background: rebeccapurple; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+            <button onclick="tutorial.nextStep()" 
+                    style="background: rebeccapurple; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
                 ${index === this.steps.length - 1 ? 'Finish' : 'Next'}
             </button>
         `;
-        
+
         // Position popup
         popup.style.top = `${rect.bottom + 10}px`;
         popup.style.left = `${rect.left}px`;
-        
-        // Clear previous
-        this.clearStep();
-        
-        // Add new elements
-        document.body.appendChild(highlight);
         document.body.appendChild(popup);
-        popup.style.display = 'block';
-        
+
         this.currentStep = index;
+    }
+
+    nextStep() {
+        this.showStep(this.currentStep + 1);
     }
 
     clearStep() {
@@ -100,7 +101,5 @@ class TutorialGuide {
     }
 }
 
-let tutorial;
-document.addEventListener('DOMContentLoaded', () => {
-    tutorial = new TutorialGuide();
-});
+// Initialize the tutorial
+const tutorial = new TutorialGuide();
