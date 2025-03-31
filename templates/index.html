@@ -8,8 +8,16 @@
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/navbar.css">
     <link rel="stylesheet" href="static/css/hero.css">
+    <script src="static/js/mobile-notice.js"></script>
 </head>
 <body>
+    <div id="mobileNotice" class="mobile-notice">
+        <div class="mobile-notice-content">
+            <h3>Desktop Recommended</h3>
+            <p>For the best experience, please use a desktop or laptop computer.</p>
+            <button onclick="dismissMobileNotice()">Got it</button>
+        </div>
+    </div>
     {% include 'components/navbar.html' %}
     <div class="hero-section">
         <div class="hero-content">
