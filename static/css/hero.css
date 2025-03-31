@@ -28,7 +28,6 @@
     margin: 0;
     transform: skew(-5deg);
     font-weight: 900;
-    -webkit-text-stroke: 1px white;
 }
 
 .hero-title .highlight {
