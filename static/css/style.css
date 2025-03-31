@@ -187,7 +187,9 @@ body {
   background: var(--color-primary);
   color: var(--color-white);
   cursor: pointer;
-  font-family: var(--font-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 800;
+  -webkit-font-smoothing: antialiased;
   text-transform: uppercase;
   letter-spacing: -1px;
 }
