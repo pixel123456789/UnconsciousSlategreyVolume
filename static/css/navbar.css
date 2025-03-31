@@ -107,6 +107,13 @@
   opacity: 1;
 }
 
+#last_btn{
+  width: 200px;
+  padding-right:50px;
+  margin-right:-80px
+  
+}
+
 @media (max-width: 768px) {
   .hamburger {
     display: block;
