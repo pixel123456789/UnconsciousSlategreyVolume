@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .mobile-notice {
     display: none;
     position: fixed;
