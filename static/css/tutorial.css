@@ -5,19 +5,28 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     z-index: 9999;
     display: none;
+    backdrop-filter: blur(4px);
 }
 
 .tutorial-step {
     position: absolute;
-    background: #fff;
+    background: #1a1a1a;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 4px;
     max-width: 300px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     display: none;
+    border-left: 4px solid rebeccapurple;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tutorial-step p {
+    margin-bottom: 15px;
+    line-height: 1.4;
 }
 
 .tutorial-highlight {
@@ -25,6 +34,7 @@
     border: 2px solid rebeccapurple;
     border-radius: 4px;
     animation: pulse 2s infinite;
+    z-index: 10000;
 }
 
 @keyframes pulse {
@@ -35,30 +45,51 @@
 
 .sitemap {
     padding: 2rem;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 88px auto 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.sitemap h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    transform: skew(-5deg);
+    color: white;
 }
 
 .sitemap-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
 }
 
 .sitemap-item {
     background: #1a1a1a;
-    padding: 1rem;
-    border-radius: 8px;
+    padding: 1.5rem;
+    border-radius: 4px;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
     border-left: 4px solid rebeccapurple;
+    text-decoration: none;
 }
 
 .sitemap-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(102, 51, 153, 0.2);
+    background: #222;
+}
+
+.sitemap-item h3 {
+    margin: 0 0 0.5rem 0;
+    color: rebeccapurple;
+    font-size: 1.4rem;
+}
+
+.sitemap-item p {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
@@ -67,6 +98,11 @@
     }
     
     .tutorial-step {
-        max-width: 80%;
+        max-width: 90%;
+        margin: 0 5%;
+    }
+
+    .sitemap h1 {
+        font-size: 2rem;
     }
 }
